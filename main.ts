@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const TilemapThing = SpriteKind.create()
+}
 function run_level_1 () {
     while (true) {
         pause(0)
@@ -88,8 +91,19 @@ function enable_controls (en: boolean) {
     }
 }
 function create_tilemap_things () {
-	
+    for (let location of tiles.getTilesByType(assets.tile`tree_1`)) {
+        tiles.setTileAt(location, assets.tile`transparency8`)
+        tiles.setWallAt(tiles.locationInDirection(location, CollisionDirection.Top), true)
+        sprite_tilemap_thing = sprites.create(assets.image`tree_1`, SpriteKind.TilemapThing)
+        sprite_tilemap_thing.setFlag(SpriteFlag.Ghost, true)
+        sprite_tilemap_thing.x = tiles.locationXY(location, tiles.XY.x)
+        sprite_tilemap_thing.bottom = tiles.locationXY(location, tiles.XY.bottom)
+    }
+    for (let sprite_tilemap_thing of sprites.allOfKind(SpriteKind.TilemapThing)) {
+        sprite_tilemap_thing.z = sprite_tilemap_thing.bottom / 100
+    }
 }
+let sprite_tilemap_thing: Sprite = null
 let controls_enabled = false
 let sprite_player: Sprite = null
 let return_val = false
@@ -100,5 +114,12 @@ current_level = 0
 in_level = false
 level_tilemaps = [tiles.createSmallMap(tilemap`level_0`)]
 scene.setBackgroundColor(15)
-prepare_level(1)
-run_level(1)
+timer.background(function () {
+    prepare_level(1)
+    run_level(1)
+})
+game.onUpdate(function () {
+    if (in_level) {
+        sprite_player.z = sprite_player.bottom / 100
+    }
+})

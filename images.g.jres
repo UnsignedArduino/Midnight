@@ -4,6 +4,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "player_face_down"
     },
+    "image2": {
+        "data": "hwQkACkAAAAAAAAAAAAAAAAAEBEAAAAAAAAAAAAAAAAAAAAAAAAAAAABEP8RAQAAAAAAAAAAAAAAAAAAAAAAABAf8f//HwAAAAAAAAAAAAAAAAAAAAAAABD//////xEAAAAAAAAAAAAAAAAAAAAQAPH///////8BAAAAAAAAAAAAAAAAAADxAfH///////8BAAAAAAAAAAAAAAAAABD/H/////////8fAQAAAAAAAAAAAAAAAAH/////////////AQAAAAAAAAAAABAAEP//////////////HwAAAAAAAAAAAPEB8f//////////////HwAAAAAAAAAAAPEf////////////////HwAAAAAAAAAQAfH/////////////////HwAAAAAAAAAQH///////////////////HwAAAAAAAAAQ////////////////////HwAAAAAAAAAQ////////////////////HwEAAAAAAAAQ/////////////////////xEREQEAAADx//////////////////////H//w8AAADx////////////////////H////w8AAAAQ/////////////////////xHx/w8AAAAQ//////////////////////Ef/w8AAAAQ////////////////////H//xEQEAAAAA8f//////////////////8RERAAAAAAAA8f//////////////////8QEAAAAAAAAAEfH/////////////////HwAAAAAAAAAAABAR8f///////////////wEAAAAAAAAAAAAAEP//////////////HwAAAAAAAAAAAAAAABH/////////////AQAAAAAAAAAAAAAAAADx////////////AQAAAAAAAAAAAAAAAAAQ//////////8fAQAAAAAAAAAAAAAAAAAA8f////////8BAAAAAAAAAAAAAAAAAAAAEP///////x8AAAAAAAAAAAAAAAAAAAAAAPH//////x8AAAAAAAAAAAAAAAAAAAAAABDxH///HwEAAAAAAAAAAAAAAAAAAAAAAAAQAfH/AQAAAAAAAAAAAAAAAAAAAAAAAAAAABAfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAA=",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "tree_1"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
