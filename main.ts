@@ -18,9 +18,11 @@ function run_level (level: number) {
 }
 function prepare_level (level: number) {
     make_player()
+    tiles.setCurrentTilemap(level_tilemaps[level - 1])
     if (level == 1) {
         prepare_level_1()
     }
+    create_tilemap_things()
 }
 function prepare_level_1 () {
 	
@@ -364,6 +366,7 @@ function make_player () {
     200,
     characterAnimations.rule(Predicate.FacingDown, Predicate.NotMoving)
     )
+    scene.cameraFollowSprite(sprite_player)
 }
 function enable_controls (en: boolean) {
     controls_enabled = en
@@ -373,10 +376,18 @@ function enable_controls (en: boolean) {
         controller.moveSprite(sprite_player, 0, 0)
     }
 }
+function create_tilemap_things () {
+	
+}
 let controls_enabled = false
 let sprite_player: Sprite = null
 let return_val = false
+let level_tilemaps: tiles.TileMapData[] = []
 let in_level = false
 let current_level = 0
+current_level = 0
+in_level = false
+level_tilemaps = [tilemap`level_1`]
+scene.setBackgroundColor(15)
 prepare_level(1)
 run_level(1)
