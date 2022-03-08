@@ -115,6 +115,7 @@ let sprite_tilemap_thing: Sprite = null
 let level_tilemaps: tiles.WorldMap[] = []
 let in_level = false
 let current_level = 0
+stats.turnStats(true)
 current_level = 0
 in_level = false
 level_tilemaps = [tiles.createSmallMap(tilemap`level_0`)]
