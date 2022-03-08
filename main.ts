@@ -103,6 +103,7 @@ function enable_controls (en: boolean) {
 function create_tilemap_things () {
     spawn_tilemap_thing(assets.tile`tree_1`, assets.image`tree_1`)
     spawn_tilemap_thing(assets.tile`tile_tree_2`, assets.image`tree_2`)
+    spawn_tilemap_thing(assets.tile`tile_tree_3`, assets.image`tree_3`)
     for (let sprite_tilemap_thing of sprites.allOfKind(SpriteKind.TilemapThing)) {
         sprite_tilemap_thing.z = sprite_tilemap_thing.bottom / 100
     }
