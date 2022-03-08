@@ -18,7 +18,7 @@ function run_level (level: number) {
 }
 function prepare_level (level: number) {
     make_player()
-    tiles.setCurrentTilemap(level_tilemaps[level - 1])
+    tiles.loadMap(level_tilemaps[level - 1])
     if (level == 1) {
         prepare_level_1()
     }
@@ -28,341 +28,52 @@ function prepare_level_1 () {
 	
 }
 function make_player () {
-    sprite_player = sprites.create(img`
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . 1 1 f f f f 1 1 . . . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . 1 f f f 1 f f f f 1 f f f 1 . 
-        . 1 f f f 1 f f f f 1 f f f 1 . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 1 1 f f f f f f 1 1 1 . . 
-        . . . . . 1 f 1 1 f 1 . . . . . 
-        . . . . . 1 1 . . 1 1 . . . . . 
-        `, SpriteKind.Player)
+    sprite_player = sprites.create(assets.image`player_face_down`, SpriteKind.Player)
     characterAnimations.loopFrames(
     sprite_player,
-    [img`
-        . . . . 1 1 1 1 1 1 1 . . . . . 
-        . . . 1 f 1 f f f f f 1 . . . . 
-        . . 1 f f f 1 f f f f f 1 . . . 
-        . . 1 f f f f 1 1 1 f f 1 . . . 
-        . 1 f f f f f f f f 1 1 1 . . . 
-        . 1 f f 1 1 1 1 1 f f f 1 . . . 
-        . 1 1 1 f f f f f 1 1 1 1 1 . . 
-        . 1 f f f f f 1 f f f f f 1 . . 
-        . . 1 f f f f 1 f f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . . 1 f f f f f f f 1 . . . . 
-        . . . 1 f f f f f f f 1 . . . . 
-        . . . 1 f f f f f f f 1 . . . . 
-        . . . 1 f f f f f f 1 . . . . . 
-        . . . . 1 1 f f f 1 . . . . . . 
-        . . . . . . 1 1 1 . . . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . 1 1 1 1 1 1 . . . . . . 
-        . . . 1 f 1 f f f f 1 1 . . . . 
-        . . 1 f f f 1 f f f f f 1 . . . 
-        . . 1 f f f f 1 1 1 f f 1 . . . 
-        . 1 f f f f f f f f 1 1 1 . . . 
-        . 1 f f 1 1 1 1 f f f f 1 . . . 
-        . 1 1 1 f f f f 1 1 1 1 1 1 . . 
-        . 1 f f f f 1 f f f f f f 1 . . 
-        . . 1 f f f 1 f f f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . . 1 f f f f f f 1 . . . . . 
-        . . . 1 f f f f f f 1 . . . . . 
-        . . 1 f f f f f f f f 1 . . . . 
-        . . 1 f f f 1 1 1 f f 1 . . . . 
-        . . . 1 1 1 . . . 1 1 . . . . . 
-        `],
+    assets.animation`player_walk_left`,
     200,
     characterAnimations.rule(Predicate.MovingLeft)
     )
     characterAnimations.loopFrames(
     sprite_player,
-    [img`
-        . . . . 1 1 1 1 1 1 1 . . . . . 
-        . . . 1 f 1 f f f f f 1 . . . . 
-        . . 1 f f f 1 f f f f f 1 . . . 
-        . . 1 f f f f 1 1 1 f f 1 . . . 
-        . 1 f f f f f f f f 1 1 1 . . . 
-        . 1 f f 1 1 1 1 1 f f f 1 . . . 
-        . 1 1 1 f f f f f 1 1 1 1 1 . . 
-        . 1 f f f f f 1 f f f f f 1 . . 
-        . . 1 f f f f 1 f f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . . 1 f f f f f f f 1 . . . . 
-        . . . 1 f f f f f f f 1 . . . . 
-        . . . 1 f f f f f f f 1 . . . . 
-        . . . 1 f f f f f f 1 . . . . . 
-        . . . . 1 1 f f f 1 . . . . . . 
-        . . . . . . 1 1 1 . . . . . . . 
-        `],
+    assets.animation`player_look_left`,
     200,
     characterAnimations.rule(Predicate.FacingLeft, Predicate.NotMoving)
     )
     characterAnimations.loopFrames(
     sprite_player,
-    [img`
-        . . . . . 1 1 1 1 1 1 1 . . . . 
-        . . . . 1 f f f f f 1 f 1 . . . 
-        . . . 1 f f f f f 1 f f f 1 . . 
-        . . . 1 f f 1 1 1 f f f f 1 . . 
-        . . . 1 1 1 f f f f f f f f 1 . 
-        . . . 1 f f f 1 1 1 1 1 f f 1 . 
-        . . 1 1 1 1 1 f f f f f 1 1 1 . 
-        . . 1 f f f f f 1 f f f f f 1 . 
-        . . 1 f f f f f 1 f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . . . 1 f f f f f f f 1 . . . 
-        . . . . 1 f f f f f f f 1 . . . 
-        . . . . 1 f f f f f f f 1 . . . 
-        . . . . . 1 f f f f f f 1 . . . 
-        . . . . . . 1 f f f 1 1 . . . . 
-        . . . . . . . 1 1 1 . . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . 1 1 1 1 1 1 . . . . 
-        . . . . 1 1 f f f f 1 f 1 . . . 
-        . . . 1 f f f f f 1 f f f 1 . . 
-        . . . 1 f f 1 1 1 f f f f 1 . . 
-        . . . 1 1 1 f f f f f f f f 1 . 
-        . . . 1 f f f f 1 1 1 1 f f 1 . 
-        . . 1 1 1 1 1 1 f f f f 1 1 1 . 
-        . . 1 f f f f f f 1 f f f f 1 . 
-        . . 1 f f f f f f 1 f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . . . . 1 f f f f f f 1 . . . 
-        . . . . . 1 f f f f f f 1 . . . 
-        . . . . 1 f f f f f f f f 1 . . 
-        . . . . 1 f f 1 1 1 f f f 1 . . 
-        . . . . . 1 1 . . . 1 1 1 . . . 
-        `],
+    assets.animation`player_walk_right`,
     200,
     characterAnimations.rule(Predicate.MovingRight)
     )
     characterAnimations.loopFrames(
     sprite_player,
-    [img`
-        . . . . . 1 1 1 1 1 1 1 . . . . 
-        . . . . 1 f f f f f 1 f 1 . . . 
-        . . . 1 f f f f f 1 f f f 1 . . 
-        . . . 1 f f 1 1 1 f f f f 1 . . 
-        . . . 1 1 1 f f f f f f f f 1 . 
-        . . . 1 f f f 1 1 1 1 1 f f 1 . 
-        . . 1 1 1 1 1 f f f f f 1 1 1 . 
-        . . 1 f f f f f 1 f f f f f 1 . 
-        . . 1 f f f f f 1 f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . . . 1 f f f f f f f 1 . . . 
-        . . . . 1 f f f f f f f 1 . . . 
-        . . . . 1 f f f f f f f 1 . . . 
-        . . . . . 1 f f f f f f 1 . . . 
-        . . . . . . 1 f f f 1 1 . . . . 
-        . . . . . . . 1 1 1 . . . . . . 
-        `],
+    assets.animation`player_look_right`,
     200,
     characterAnimations.rule(Predicate.FacingRight, Predicate.NotMoving)
     )
     characterAnimations.loopFrames(
     sprite_player,
-    [img`
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . 1 1 f f f f 1 1 . . . . 
-        . . . 1 f f f 1 1 f f f 1 . . . 
-        . . 1 1 1 1 1 f f 1 1 1 1 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . 1 1 f f f f f f f f f f f 1 . 
-        . 1 f f f f f f f f f f f f 1 . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 1 1 f f f f f f 1 1 1 . . 
-        . . . . . 1 f 1 1 f 1 . . . . . 
-        . . . . . 1 1 . . 1 1 . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . 1 1 f f f f 1 1 . . . . 
-        . . . 1 f f f 1 1 f f f 1 . . . 
-        . . . 1 1 1 1 f f 1 1 1 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . 1 f f f f f f f f f f f f 1 . 
-        . 1 1 f f f f f f f f f f 1 1 . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . . 1 f f f f f f f f f 1 . . 
-        . . . 1 f f f f f f f f f 1 . . 
-        . . . 1 f f f 1 1 1 1 1 1 . . . 
-        . . . . 1 1 1 . . . . . . . . . 
-        `,img`
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . 1 1 f f f f 1 1 . . . . 
-        . . . 1 f f f 1 1 f f f 1 . . . 
-        . . 1 1 1 1 1 f f 1 1 1 1 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . 1 1 f f f f f f f f f f f 1 . 
-        . 1 f f f f f f f f f f f f 1 . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 1 1 f f f f f f 1 1 1 . . 
-        . . . . . 1 f 1 1 f 1 . . . . . 
-        . . . . . 1 1 . . 1 1 . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . 1 1 f f f f 1 1 . . . . 
-        . . . 1 f f f 1 1 f f f 1 . . . 
-        . . . 1 1 1 1 f f 1 1 1 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . 1 1 f f f f f f f f f f 1 1 . 
-        . 1 1 f f f f f f f f f f 1 1 . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f 1 . . . 
-        . . . 1 1 1 1 1 1 f f f 1 . . . 
-        . . . . . . . . . 1 1 1 . . . . 
-        `],
+    assets.animation`player_walk_up`,
     200,
     characterAnimations.rule(Predicate.MovingUp)
     )
     characterAnimations.loopFrames(
     sprite_player,
-    [img`
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . 1 1 f f f f 1 1 . . . . 
-        . . . 1 f f f 1 1 f f f 1 . . . 
-        . . 1 1 1 1 1 f f 1 1 1 1 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . 1 1 f f f f f f f f f f f 1 . 
-        . 1 f f f f f f f f f f f f 1 . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 1 1 f f f f f f 1 1 1 . . 
-        . . . . . 1 f 1 1 f 1 . . . . . 
-        . . . . . 1 1 . . 1 1 . . . . . 
-        `],
+    assets.animation`player_look_up`,
     200,
     characterAnimations.rule(Predicate.FacingUp, Predicate.NotMoving)
     )
     characterAnimations.loopFrames(
     sprite_player,
-    [img`
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . 1 1 f f f f 1 1 . . . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f 1 1 1 1 1 1 f f 1 . . 
-        . . 1 1 1 f f f f f f 1 1 1 . . 
-        . 1 1 f f f 1 f f 1 f f f f 1 . 
-        . 1 f f f f 1 f f 1 f f f f 1 . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 1 1 f f f f f f 1 1 1 . . 
-        . . . . . 1 f 1 1 f 1 . . . . . 
-        . . . . . 1 1 . . 1 1 . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . 1 1 f f f f 1 1 . . . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . 1 f f f 1 1 1 1 1 1 f f f 1 . 
-        . 1 1 1 1 f f f f f f 1 1 1 1 . 
-        . . 1 f f f 1 f f 1 f f f 1 . . 
-        . . 1 f f f 1 f f 1 f f f 1 . . 
-        . . . 1 f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 1 f f f f f f f f 1 . . . 
-        . . . . 1 f f f f f f 1 . . . . 
-        . . . . 1 f f 1 1 1 1 . . . . . 
-        . . . . 1 1 1 . . . . . . . . . 
-        `,img`
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . 1 1 f f f f 1 1 . . . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f 1 1 1 1 1 1 f f 1 . . 
-        . . 1 1 1 f f f f f f 1 1 1 . . 
-        . 1 f f f f 1 f f 1 f f f 1 1 . 
-        . 1 f f f f 1 f f 1 f f f f 1 . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 1 1 f f f f f f 1 1 1 . . 
-        . . . . . 1 f 1 1 f 1 . . . . . 
-        . . . . . 1 1 . . 1 1 . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . 1 1 f f f f 1 1 . . . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . 1 f f f 1 1 1 1 1 1 f f f 1 . 
-        . 1 1 1 1 f f f f f f 1 1 1 1 . 
-        . . 1 f f f 1 f f 1 f f f 1 . . 
-        . . 1 f f f 1 f f 1 f f f 1 . . 
-        . . 1 f f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 1 . . 
-        . . . . 1 f f f f f f 1 . . . . 
-        . . . . . 1 1 1 1 f f 1 . . . . 
-        . . . . . . . . . 1 1 1 . . . . 
-        `],
+    assets.animation`player_walk_down`,
     200,
     characterAnimations.rule(Predicate.MovingDown)
     )
     characterAnimations.loopFrames(
     sprite_player,
-    [img`
-        . . . . . . 1 1 1 1 . . . . . . 
-        . . . . 1 1 f f f f 1 1 . . . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f 1 1 1 1 1 1 f f 1 . . 
-        . . 1 1 1 f f f f f f 1 1 1 . . 
-        . 1 1 f f f 1 f f 1 f f f f 1 . 
-        . 1 f f f f 1 f f 1 f f f f 1 . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . . 1 f f f f f f f f 1 . . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 f f f f f f f f f f 1 . . 
-        . . 1 1 1 f f f f f f 1 1 1 . . 
-        . . . . . 1 f 1 1 f 1 . . . . . 
-        . . . . . 1 1 . . 1 1 . . . . . 
-        `],
+    assets.animation`player_look_down`,
     200,
     characterAnimations.rule(Predicate.FacingDown, Predicate.NotMoving)
     )
@@ -382,12 +93,12 @@ function create_tilemap_things () {
 let controls_enabled = false
 let sprite_player: Sprite = null
 let return_val = false
-let level_tilemaps: tiles.TileMapData[] = []
+let level_tilemaps: tiles.WorldMap[] = []
 let in_level = false
 let current_level = 0
 current_level = 0
 in_level = false
-level_tilemaps = [tilemap`level_1`]
+level_tilemaps = [tiles.createSmallMap(tilemap`level_0`)]
 scene.setBackgroundColor(15)
 prepare_level(1)
 run_level(1)
