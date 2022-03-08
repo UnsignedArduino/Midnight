@@ -7,6 +7,16 @@ function run_level_1 () {
     }
     return true
 }
+function spawn_tilemap_thing (tile: Image, thing_image: Image) {
+    for (let location of tiles.getTilesByType(tile)) {
+        tiles.setTileAt(location, assets.tile`transparency8`)
+        tiles.setWallAt(tiles.locationInDirection(location, CollisionDirection.Top), true)
+        sprite_tilemap_thing = sprites.create(thing_image, SpriteKind.TilemapThing)
+        sprite_tilemap_thing.setFlag(SpriteFlag.Ghost, true)
+        sprite_tilemap_thing.x = tiles.locationXY(location, tiles.XY.x)
+        sprite_tilemap_thing.bottom = tiles.locationXY(location, tiles.XY.bottom)
+    }
+}
 function run_level (level: number) {
     current_level = level
     in_level = true
@@ -91,22 +101,16 @@ function enable_controls (en: boolean) {
     }
 }
 function create_tilemap_things () {
-    for (let location of tiles.getTilesByType(assets.tile`tree_1`)) {
-        tiles.setTileAt(location, assets.tile`transparency8`)
-        tiles.setWallAt(tiles.locationInDirection(location, CollisionDirection.Top), true)
-        sprite_tilemap_thing = sprites.create(assets.image`tree_1`, SpriteKind.TilemapThing)
-        sprite_tilemap_thing.setFlag(SpriteFlag.Ghost, true)
-        sprite_tilemap_thing.x = tiles.locationXY(location, tiles.XY.x)
-        sprite_tilemap_thing.bottom = tiles.locationXY(location, tiles.XY.bottom)
-    }
+    spawn_tilemap_thing(assets.tile`tree_1`, assets.image`tree_1`)
+    spawn_tilemap_thing(assets.tile`tile_tree_2`, assets.image`tree_2`)
     for (let sprite_tilemap_thing of sprites.allOfKind(SpriteKind.TilemapThing)) {
         sprite_tilemap_thing.z = sprite_tilemap_thing.bottom / 100
     }
 }
-let sprite_tilemap_thing: Sprite = null
 let controls_enabled = false
 let sprite_player: Sprite = null
 let return_val = false
+let sprite_tilemap_thing: Sprite = null
 let level_tilemaps: tiles.WorldMap[] = []
 let in_level = false
 let current_level = 0

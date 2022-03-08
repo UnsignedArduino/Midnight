@@ -9,6 +9,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "tree_1"
     },
+    "image3": {
+        "data": "hwQgACAAAAAAAAAAAAAAEAEAAAAAAAAAAAAAAAAAEPEfAQAAAAAAAAAAAAAAABD//wEAAAAAAAAAAAAAAADx//8fEQAAAAAAAAAAAAAQ/////x8AAAAAAAAAAAAQ8f////8fAAAAAAAAAAAA8f///////wEAAAAAAAAAAPH///////8BAAAAAAAAABH/////////HwAAAAAAABD//////////x8AAAAAAADx//////////8fABAAAAAQ/////////////wEQAAAQ8f////////////8BEQAAEP//////////////H/EBABD////////////////xHwHx////////////////8f8f8f////////////////EfARD////////////////xAQAQ//////////////8f8QEAEPH/////////////ARABAAAQ/////////////wEQAAAAAPH//////////x8AAAAAAAAQ//////////8fAAAAAAAAABH/////////HwAAAAAAAAAA8f///////wEAAAAAAAAAAPH///////8BAAAAAAAAAAAQ8f////8fAAAAAAAAAAAAABD/////HwAAAAAAAAAAAAAA8f///xEAAAAAAAAAAAAAABD//x8AAAAAAAAAAAAAAAAQ8R8RAAAAAAAAAAAAAAAAABABAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "tree_2"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
