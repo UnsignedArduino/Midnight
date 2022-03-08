@@ -136,6 +136,61 @@ namespace myImages {
 ...............1f1..............
 ................1...............
 `;
+            case "image5":
+            case "rock_1":return img`
+. . . 1 1 1 1 . 
+. . 1 f f f f 1 
+. 1 f f f f f 1 
+1 f f f f f f 1 
+1 f f f f f f 1 
+1 f f f f f f 1 
+1 f f f f f f 1 
+. 1 1 1 1 1 1 . 
+`;
+            case "image6":
+            case "stump_1":return img`
+. 1 1 1 1 1 . . 
+1 f f f f f 1 . 
+1 1 f f f 1 1 1 
+1 f 1 1 1 f f 1 
+1 f f f f f f 1 
+1 f f f f f f 1 
+1 f f f f f f 1 
+1 f f f f f f 1 
+`;
+            case "image7":
+            case "a_button":return img`
+. 1 1 1 1 1 . . 
+1 f f f f f 1 . 
+1 f f 1 f f 1 . 
+1 f 1 f 1 f 1 . 
+1 f 1 1 1 f 1 . 
+1 f 1 f 1 f 1 . 
+1 f f f f f 1 . 
+. 1 1 1 1 1 . . 
+`;
+            case "image8":
+            case "stump_1_pressed":return img`
+. . . . . . . . 
+. 1 1 1 1 1 . . 
+1 f f f f f 1 . 
+1 1 f f f 1 1 1 
+1 f 1 1 1 f f 1 
+1 f f f f f f 1 
+1 f f f f f f 1 
+1 f f f f f f 1 
+`;
+            case "image9":
+            case "ground":return img`
+f f f f f f f f 
+f f f f f f f f 
+f f f f f f f f 
+f f f f f f f f 
+f f f f f f f f 
+f f f f f f f f 
+f f f f f f f f 
+f f f f f f f f 
+`;
         }
         return null;
     })

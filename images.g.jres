@@ -19,6 +19,31 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "tree_3"
     },
+    "image5": {
+        "data": "hwQIAAgAAAAAEBEBAPH/HxD//x/x//8f8f//H/H//x/x//8fEBERAQ==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "rock_1"
+    },
+    "image6": {
+        "data": "hwQIAAgAAAAQERER8fH///Ef///xH///8R////Hx//8Q8f//ABEREQ==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "stump_1"
+    },
+    "image7": {
+        "data": "hwQIAAgAAAAQEREB8f//H/EfER/x8fEf8R8RH/H//x8QEREBAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "a_button"
+    },
+    "image8": {
+        "data": "hwQIAAgAAAAAEREREB///xD/8f8Q//H/EP/x/xAf//8AEf//ABAREQ==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "stump_1_pressed"
+    },
+    "image9": {
+        "data": "hwQIAAgAAAD//////////////////////////////////////////w==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "ground"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
