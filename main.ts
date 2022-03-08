@@ -1,10 +1,29 @@
-function set_level (level: number) {
-    if (level == 1) {
-        level_1()
-    } else {
-        return
+function run_level_1 () {
+    while (true) {
+        pause(0)
     }
+    return true
+}
+function run_level (level: number) {
     current_level = level
+    in_level = true
+    enable_controls(true)
+    if (level == 1) {
+        return_val = run_level_1()
+    }
+    in_level = false
+    enable_controls(false)
+    sprite_player.destroy()
+    return return_val
+}
+function prepare_level (level: number) {
+    make_player()
+    if (level == 1) {
+        prepare_level_1()
+    }
+}
+function prepare_level_1 () {
+	
 }
 function make_player () {
     sprite_player = sprites.create(img`
@@ -354,12 +373,10 @@ function enable_controls (en: boolean) {
         controller.moveSprite(sprite_player, 0, 0)
     }
 }
-function level_1 () {
-	
-}
 let controls_enabled = false
 let sprite_player: Sprite = null
+let return_val = false
+let in_level = false
 let current_level = 0
-make_player()
-set_level(1)
-enable_controls(true)
+prepare_level(1)
+run_level(1)
