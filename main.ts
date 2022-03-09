@@ -168,14 +168,14 @@ function create_tilemap_things () {
     spawn_tilemap_thing(assets.tile`tree_1`, assets.image`tree_1`)
     spawn_tilemap_thing(assets.tile`tile_tree_2`, assets.image`tree_2`)
     spawn_tilemap_thing(assets.tile`tile_tree_3`, assets.image`tree_3`)
+    for (let sprite_tilemap_thing of sprites.allOfKind(SpriteKind.TilemapThing)) {
+        sprite_tilemap_thing.z = sprite_tilemap_thing.bottom / 100
+    }
     for (let location of tiles.getTilesByType(assets.tile`tile_target`)) {
         sprite_tilemap_thing = sprites.create(assets.image`ground`, SpriteKind.TilemapThing)
         sprite_tilemap_thing.setFlag(SpriteFlag.Ghost, true)
         sprite_tilemap_thing.z = -1
         tiles.placeOnTile(sprite_tilemap_thing, location)
-    }
-    for (let sprite_tilemap_thing of sprites.allOfKind(SpriteKind.TilemapThing)) {
-        sprite_tilemap_thing.z = sprite_tilemap_thing.bottom / 100
     }
 }
 let controls_enabled = false
@@ -202,8 +202,17 @@ timer.background(function () {
 game.onUpdate(function () {
     if (in_level) {
         sprite_player.z = sprite_player.bottom / 100
+        if (false) {
+            for (let kind of [
+            SpriteKind.Player,
+            SpriteKind.TilemapThing,
+            SpriteKind.UntouchedThing,
+            SpriteKind.TouchedThing
+            ]) {
+                for (let sprite of sprites.allOfKind(kind)) {
+                    sprite.sayText("Z: " + sprite.z)
+                }
+            }
+        }
     }
-})
-game.onUpdate(function () {
-	
 })
