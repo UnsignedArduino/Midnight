@@ -77,6 +77,8 @@ function animate_screen_leaving (velx: number, vely: number) {
 function prepare_level (level: number) {
     make_player()
     tiles.loadMap(tiles.copyMap(level_tilemaps[level - 1]))
+    tiles.placeOnRandomTile(sprite_player, assets.tile`start`)
+    tiles.setTileAt(tiles.getTilesByType(assets.tile`start`)[0], assets.tile`transparency8`)
     sprite_things = []
     if (level == 1) {
         prepare_level_1()
@@ -182,13 +184,15 @@ function run_level_2 () {
         pause(0)
         if (is_overlapping_and_a(sprite_things[0], assets.image`stump_1_pressed`)) {
         	
-        } else if (is_overlapping_and_a(sprite_things[1], assets.image`stump_1_pressed`)) {
+        }
+        if (is_overlapping_and_a(sprite_things[1], assets.image`stump_1_pressed`)) {
         	
-        } else if (is_overlapping_and_a(sprite_things[2], assets.image`stump_1_pressed`)) {
+        }
+        if (is_overlapping_and_a(sprite_things[2], assets.image`stump_1_pressed`)) {
         	
         }
     }
-    animate_screen_leaving(0, 100)
+    animate_screen_leaving(100, 0)
     fade(true, true)
     return true
 }
@@ -203,6 +207,12 @@ function is_on_location (locs_in_list: any[]) {
         return true
     }
     return false
+}
+function set_tiles (locations: any[], tile: Image, wall: boolean) {
+    for (let location of locations) {
+        tiles.setTileAt(location, tile)
+        tiles.setWallAt(location, wall)
+    }
 }
 function fade (fade_in: boolean, block: boolean) {
     if (fade_in) {
