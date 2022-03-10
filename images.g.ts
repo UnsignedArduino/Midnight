@@ -191,6 +191,17 @@ f f f f f f f f
 f f f f f f f f 
 f f f f f f f f 
 `;
+            case "image10":
+            case "actual_rock":return img`
+. . . . . . . . 
+. . . . . . . . 
+. . 1 1 1 1 . . 
+. 1 f f f f 1 . 
+. 1 f f f f f 1 
+1 f f f f f f 1 
+1 f f f f f f 1 
+1 f f f f f f 1 
+`;
         }
         return null;
     })

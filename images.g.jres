@@ -44,6 +44,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "ground"
     },
+    "image10": {
+        "data": "hwQIAAgAAAAAABARABDx/wDx//8A8f//APH//wDx//8AEP//AAAREQ==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "actual_rock"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",

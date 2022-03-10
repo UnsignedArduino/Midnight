@@ -2,6 +2,7 @@ namespace SpriteKind {
     export const TilemapThing = SpriteKind.create()
     export const UntouchedThing = SpriteKind.create()
     export const TouchedThing = SpriteKind.create()
+    export const ToggleableThing = SpriteKind.create()
 }
 function run_level_1 () {
     fade(false, false)
@@ -30,7 +31,7 @@ function swap_tile (old_tile: Image, new_tile: Image, de_wall: boolean) {
     }
 }
 function prepare_level_3 () {
-	
+    sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock`), true, true, assets.image`actual_rock`))
 }
 function spawn_tilemap_thing (tile: Image, thing_image: Image) {
     for (let location of tiles.getTilesByType(tile)) {
@@ -73,6 +74,20 @@ function wait_for_overlap_and_a (target: Sprite, new_image: Image) {
     }
     target.setKind(SpriteKind.TouchedThing)
     target.setImage(new_image)
+}
+function make_toggleable_thing (loc_in_list: any[], clear_tile: boolean, wall_tile: boolean, image2: Image) {
+    location = loc_in_list[0]
+    if (clear_tile) {
+        tiles.setTileAt(location, assets.tile`transparency8`)
+    }
+    if (wall_tile) {
+        tiles.setWallAt(tiles.locationInDirection(location, CollisionDirection.Top), true)
+    }
+    sprite_thing = sprites.create(image2, SpriteKind.ToggleableThing)
+    sprite_thing.x = tiles.locationXY(location, tiles.XY.x)
+    sprite_thing.bottom = tiles.locationXY(location, tiles.XY.bottom)
+    sprite_thing.z = sprite_thing.bottom / 100
+    return sprite_thing
 }
 function animate_screen_leaving (velx: number, vely: number) {
     enable_controls(false)
@@ -190,7 +205,7 @@ function run_level_3 () {
     while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
         pause(0)
     }
-    animate_screen_leaving(100, 0)
+    animate_screen_leaving(0, -100)
     fade(true, true)
     return true
 }
