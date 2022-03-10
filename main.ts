@@ -185,14 +185,17 @@ function run_level_2 () {
         if (is_overlapping_and_a(sprite_things[0], assets.image`stump_1_pressed`)) {
             set_tiles([tiles.getTileLocation(8, 9)], assets.tile`left_left_fence_gate_open`, false)
             set_tiles([tiles.getTileLocation(8, 10)], assets.tile`right_left_fence_gate_open`, false)
+            tiles.setWallAt(tiles.getTileLocation(8, 8), false)
         }
         if (is_overlapping_and_a(sprite_things[1], assets.image`stump_1_pressed`)) {
             set_tiles([tiles.getTileLocation(11, 9)], assets.tile`left_left_fence_gate_closed`, true)
             set_tiles([tiles.getTileLocation(11, 10)], assets.tile`right_left_fence_gate_closed`, true)
+            tiles.setWallAt(tiles.getTileLocation(11, 8), true)
         }
         if (is_overlapping_and_a(sprite_things[2], assets.image`stump_1_pressed`)) {
             set_tiles([tiles.getTileLocation(14, 9)], assets.tile`left_left_fence_gate_open`, false)
             set_tiles([tiles.getTileLocation(14, 10)], assets.tile`right_left_fence_gate_open`, false)
+            tiles.setWallAt(tiles.getTileLocation(14, 8), false)
         }
     }
     animate_screen_leaving(100, 0)
