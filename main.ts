@@ -29,6 +29,9 @@ function swap_tile (old_tile: Image, new_tile: Image, de_wall: boolean) {
         }
     }
 }
+function prepare_level_3 () {
+	
+}
 function spawn_tilemap_thing (tile: Image, thing_image: Image) {
     for (let location of tiles.getTilesByType(tile)) {
         tiles.setTileAt(location, assets.tile`transparency8`)
@@ -56,6 +59,8 @@ function run_level (level: number) {
         return_val = run_level_1()
     } else if (level == 2) {
         return_val = run_level_2()
+    } else if (level == 3) {
+        return_val = run_level_3()
     }
     in_level = false
     enable_controls(false)
@@ -84,6 +89,8 @@ function prepare_level (level: number) {
         prepare_level_1()
     } else if (level == 2) {
         prepare_level_2()
+    } else if (level == 3) {
+        prepare_level_3()
     }
     create_tilemap_things()
 }
@@ -178,6 +185,15 @@ function enable_controls (en: boolean) {
         controller.moveSprite(sprite_player, 0, 0)
     }
 }
+function run_level_3 () {
+    fade(false, false)
+    while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
+        pause(0)
+    }
+    animate_screen_leaving(100, 0)
+    fade(true, true)
+    return true
+}
 function run_level_2 () {
     fade(false, false)
     while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
@@ -265,11 +281,11 @@ color.Black
 )
 current_level = 0
 in_level = false
-level_tilemaps = [tiles.createSmallMap(tilemap`level_0`), tiles.createSmallMap(tilemap`level_2`)]
+level_tilemaps = [tiles.createSmallMap(tilemap`level_0`), tiles.createSmallMap(tilemap`level_2`), tiles.createSmallMap(tilemap`level_3`)]
 scene.setBackgroundColor(15)
 timer.background(function () {
-    prepare_level(2)
-    run_level(2)
+    prepare_level(3)
+    run_level(3)
 })
 game.onUpdate(function () {
     if (in_level) {
