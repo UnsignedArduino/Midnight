@@ -202,6 +202,17 @@ f f f f f f f f
 1 f f f f f f 1 
 1 f f f f f f 1 
 `;
+            case "image11":
+            case "rock_pressed":return img`
+. . . . . . . . 
+. . . . . . . . 
+. . . . . . . . 
+. . 1 1 1 1 . . 
+. 1 f f f f 1 . 
+. 1 f f f f f 1 
+1 f f f f f f 1 
+1 f f f f f f 1 
+`;
         }
         return null;
     })

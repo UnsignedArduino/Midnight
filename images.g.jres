@@ -49,6 +49,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "actual_rock"
     },
+    "image11": {
+        "data": "hwQIAAgAAAAAAAARAAAR/wAQ//8AEP//ABD//wAQ//8AAPH/AAAQEQ==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "rock_pressed"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",

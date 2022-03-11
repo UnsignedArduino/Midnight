@@ -3,12 +3,13 @@ namespace SpriteKind {
     export const UntouchedThing = SpriteKind.create()
     export const TouchedThing = SpriteKind.create()
     export const ToggleableThing = SpriteKind.create()
+    export const OnToggleableThing = SpriteKind.create()
 }
 function run_level_1 () {
     fade(false, false)
-    wait_for_overlap_and_a(sprite_things[0], assets.image`stump_1_pressed`)
-    swap_tile(assets.tile`left_front_fence_gate_closed0`, assets.tile`left_front_fence_gate_open`, true)
-    swap_tile(assets.tile`right_front_fence_gate_closed`, assets.tile`right_front_fence_gate_open`, true)
+    wait_for_overlap_and_a(sprite_things[0], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)
+    swap_tile(assets.tile`left_front_fence_gate_closed0`, assets.tile`left_front_fence_gate_open`, false)
+    swap_tile(assets.tile`right_front_fence_gate_closed`, assets.tile`right_front_fence_gate_open`, false)
     wait_for_location(tiles.getTilesByType(assets.tile`tile_target`))
     animate_screen_leaving(0, 100)
     fade(true, true)
@@ -22,12 +23,10 @@ function get_overlapping_sprite (target: Sprite, kind: number) {
     }
     return [][0]
 }
-function swap_tile (old_tile: Image, new_tile: Image, de_wall: boolean) {
+function swap_tile (old_tile: Image, new_tile: Image, do_wall: boolean) {
     for (let location of tiles.getTilesByType(old_tile)) {
         tiles.setTileAt(location, new_tile)
-        if (de_wall) {
-            tiles.setWallAt(location, false)
-        }
+        tiles.setWallAt(location, do_wall)
     }
 }
 function prepare_level_3 () {
@@ -43,13 +42,42 @@ function spawn_tilemap_thing (tile: Image, thing_image: Image) {
         sprite_tilemap_thing.bottom = tiles.locationXY(location, tiles.XY.bottom)
     }
 }
-function is_overlapping_and_a (target: Sprite, new_image: Image) {
-    if (sprite_player.overlapsWith(target) && controller.A.isPressed()) {
-        target.setKind(SpriteKind.TouchedThing)
+function is_overlapping_and_a (target: Sprite, new_image: Image, kind: number) {
+    if (sprite_player.overlapsWith(target) && target.kind() == kind && controller.A.isPressed()) {
+        if (target.kind() == SpriteKind.UntouchedThing) {
+            target.setKind(SpriteKind.TouchedThing)
+        } else if (target.kind() == SpriteKind.ToggleableThing) {
+            target.setKind(SpriteKind.OnToggleableThing)
+        } else if (target.kind() == SpriteKind.OnToggleableThing) {
+            target.setKind(SpriteKind.ToggleableThing)
+        }
         target.setImage(new_image)
         return true
     } else {
         return false
+    }
+}
+function wait_for_button (press: boolean, check_for_on_target: boolean) {
+    if (press) {
+        if (check_for_on_target) {
+            while (!(controller.A.isPressed()) && !(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
+                pause(0)
+            }
+        } else {
+            while (!(controller.A.isPressed())) {
+                pause(0)
+            }
+        }
+    } else {
+        if (check_for_on_target) {
+            while (controller.A.isPressed() && !(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
+                pause(0)
+            }
+        } else {
+            while (controller.A.isPressed()) {
+                pause(0)
+            }
+        }
     }
 }
 function run_level (level: number) {
@@ -68,12 +96,19 @@ function run_level (level: number) {
     sprite_player.destroy()
     return return_val
 }
-function wait_for_overlap_and_a (target: Sprite, new_image: Image) {
-    while (!(sprite_player.overlapsWith(target) && controller.A.isPressed())) {
-        pause(0)
+function wait_for_overlap_and_a (target: Sprite, new_image: Image, kind: number) {
+    if (controller.A.isPressed()) {
+        wait_for_button(false, true)
     }
-    target.setKind(SpriteKind.TouchedThing)
-    target.setImage(new_image)
+    while (true) {
+        pause(0)
+        if (is_overlapping_and_a(target, new_image, kind)) {
+            break;
+        }
+        if (controller.A.isPressed()) {
+            wait_for_button(false, true)
+        }
+    }
 }
 function make_toggleable_thing (loc_in_list: any[], clear_tile: boolean, wall_tile: boolean, image2: Image) {
     location = loc_in_list[0]
@@ -204,6 +239,16 @@ function run_level_3 () {
     fade(false, false)
     while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
         pause(0)
+        if (is_overlapping_and_a(sprite_things[0], assets.image`rock_pressed`, SpriteKind.ToggleableThing)) {
+            swap_tile(assets.tile`left_front_fence_gate_closed0`, assets.tile`left_front_fence_gate_open`, false)
+            swap_tile(assets.tile`right_front_fence_gate_closed`, assets.tile`right_front_fence_gate_open`, false)
+        } else if (is_overlapping_and_a(sprite_things[0], assets.image`actual_rock`, SpriteKind.OnToggleableThing)) {
+            swap_tile(assets.tile`left_front_fence_gate_open`, assets.tile`left_front_fence_gate_closed0`, true)
+            swap_tile(assets.tile`right_front_fence_gate_open`, assets.tile`right_front_fence_gate_closed`, true)
+        }
+        if (controller.A.isPressed()) {
+            wait_for_button(false, true)
+        }
     }
     animate_screen_leaving(0, -100)
     fade(true, true)
@@ -213,20 +258,23 @@ function run_level_2 () {
     fade(false, false)
     while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
         pause(0)
-        if (is_overlapping_and_a(sprite_things[0], assets.image`stump_1_pressed`)) {
+        if (is_overlapping_and_a(sprite_things[0], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
             set_tiles([tiles.getTileLocation(8, 9)], assets.tile`left_left_fence_gate_open`, false)
             set_tiles([tiles.getTileLocation(8, 10)], assets.tile`right_left_fence_gate_open`, false)
             tiles.setWallAt(tiles.getTileLocation(8, 8), false)
         }
-        if (is_overlapping_and_a(sprite_things[1], assets.image`stump_1_pressed`)) {
+        if (is_overlapping_and_a(sprite_things[1], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
             set_tiles([tiles.getTileLocation(11, 9)], assets.tile`left_left_fence_gate_closed`, true)
             set_tiles([tiles.getTileLocation(11, 10)], assets.tile`right_left_fence_gate_closed`, true)
             tiles.setWallAt(tiles.getTileLocation(11, 8), true)
         }
-        if (is_overlapping_and_a(sprite_things[2], assets.image`stump_1_pressed`)) {
+        if (is_overlapping_and_a(sprite_things[2], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
             set_tiles([tiles.getTileLocation(14, 9)], assets.tile`left_left_fence_gate_open`, false)
             set_tiles([tiles.getTileLocation(14, 10)], assets.tile`right_left_fence_gate_open`, false)
             tiles.setWallAt(tiles.getTileLocation(14, 8), false)
+        }
+        if (controller.A.isPressed()) {
+            wait_for_button(false, true)
         }
     }
     animate_screen_leaving(100, 0)
