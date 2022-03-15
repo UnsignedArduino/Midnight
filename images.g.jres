@@ -54,6 +54,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "rock_pressed"
     },
+    "image12": {
+        "data": "hwQBAAEAAAABAAAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "particle"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",

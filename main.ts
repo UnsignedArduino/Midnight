@@ -4,6 +4,7 @@ namespace SpriteKind {
     export const TouchedThing = SpriteKind.create()
     export const ToggleableThing = SpriteKind.create()
     export const OnToggleableThing = SpriteKind.create()
+    export const Particle = SpriteKind.create()
 }
 function run_level_1 () {
     fade(false, false)
@@ -83,6 +84,7 @@ function wait_for_button (press: boolean, check_for_on_target: boolean) {
 function run_level (level: number) {
     current_level = level
     in_level = true
+    spawn_particles = true
     enable_controls(true)
     if (level == 1) {
         return_val = run_level_1()
@@ -91,6 +93,7 @@ function run_level (level: number) {
     } else if (level == 3) {
         return_val = run_level_3()
     }
+    spawn_particles = false
     in_level = false
     enable_controls(false)
     sprite_player.destroy()
@@ -328,6 +331,7 @@ function prepare_level_2 () {
     sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_0`), true, true, assets.image`stump_1`))
     sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_3`), true, true, assets.image`stump_1`))
 }
+let sprite_particle: Sprite = null
 let controls_enabled = false
 let sprite_thing: Sprite = null
 let location: any = null
@@ -336,6 +340,7 @@ let sprite_player: Sprite = null
 let sprite_tilemap_thing: Sprite = null
 let sprite_things: Sprite[] = []
 let level_tilemaps: tiles.WorldMap[] = []
+let spawn_particles = false
 let in_level = false
 let current_level = 0
 stats.turnStats(true)
@@ -344,6 +349,7 @@ color.Black
 )
 current_level = 0
 in_level = false
+spawn_particles = false
 level_tilemaps = [tiles.createSmallMap(tilemap`level_0`), tiles.createSmallMap(tilemap`level_2`), tiles.createSmallMap(tilemap`level_3`)]
 scene.setBackgroundColor(15)
 timer.background(function () {
@@ -353,17 +359,39 @@ timer.background(function () {
 game.onUpdate(function () {
     if (in_level) {
         sprite_player.z = sprite_player.bottom / 100
+        for (let kind of [SpriteKind.Particle]) {
+            for (let sprite of sprites.allOfKind(kind)) {
+                sprite.z = sprite.bottom / 100
+            }
+        }
         if (false) {
             for (let kind of [
             SpriteKind.Player,
             SpriteKind.TilemapThing,
             SpriteKind.UntouchedThing,
-            SpriteKind.TouchedThing
+            SpriteKind.TouchedThing,
+            SpriteKind.Particle
             ]) {
                 for (let sprite of sprites.allOfKind(kind)) {
                     sprite.sayText("Z: " + sprite.z)
                 }
             }
         }
+    }
+})
+game.onUpdate(function () {
+    if (spawn_particles) {
+        timer.throttle("spawn_particle", 333, function () {
+            sprite_particle = sprites.create(assets.image`particle`, SpriteKind.Particle)
+            sprite_particle.setFlag(SpriteFlag.Ghost, true)
+            sprite_particle.vy = -10
+            sprite_particle.vx = randint(-10, 10)
+            sprite_particle.ay = 5
+            sprite_particle.x = randint(0, tiles.tilemapColumns() * tiles.tileWidth())
+            sprite_particle.y = randint(0, tiles.tilemapRows() * tiles.tileWidth())
+            sprite_particle.lifespan = 5000
+        })
+    } else {
+        sprites.destroyAllSpritesOfKind(SpriteKind.Particle)
     }
 })
