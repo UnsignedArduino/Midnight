@@ -14,7 +14,7 @@ function run_level_1 () {
     wait_for_location(tiles.getTilesByType(assets.tile`tile_target`))
     animate_screen_leaving(0, 100)
     fade(true, true)
-    return true
+    return 1
 }
 function get_overlapping_sprite (target: Sprite, kind: number) {
     for (let sprite of sprites.allOfKind(kind)) {
@@ -23,6 +23,23 @@ function get_overlapping_sprite (target: Sprite, kind: number) {
         }
     }
     return [][0]
+}
+function run_level_0 () {
+    fade(false, false)
+    return_val = 0
+    level_select_tiles = [assets.tile`level_1_tile0`, assets.tile`level_2_tile0`, assets.tile`level_3_tile`]
+    while (return_val == 0) {
+        pause(0)
+        for (let index = 0; index <= level_select_tiles.length - 1; index++) {
+            if (sprite_player.tileKindAt(TileDirection.Center, level_select_tiles[index])) {
+                return_val = index + 1
+                break;
+            }
+        }
+    }
+    animate_screen_leaving(0, 100)
+    fade(true, true)
+    return return_val
 }
 function swap_tile (old_tile: Image, new_tile: Image, do_wall: boolean) {
     for (let location of tiles.getTilesByType(old_tile)) {
@@ -86,7 +103,9 @@ function run_level (level: number) {
     in_level = true
     spawn_particles = true
     enable_controls(true)
-    if (level == 1) {
+    if (level == 0) {
+        return_val = run_level_0()
+    } else if (level == 1) {
         return_val = run_level_1()
     } else if (level == 2) {
         return_val = run_level_2()
@@ -97,6 +116,12 @@ function run_level (level: number) {
     in_level = false
     enable_controls(false)
     sprite_player.destroy()
+    sprites.destroyAllSpritesOfKind(SpriteKind.TilemapThing)
+    sprites.destroyAllSpritesOfKind(SpriteKind.UntouchedThing)
+    sprites.destroyAllSpritesOfKind(SpriteKind.TouchedThing)
+    sprites.destroyAllSpritesOfKind(SpriteKind.ToggleableThing)
+    sprites.destroyAllSpritesOfKind(SpriteKind.OnToggleableThing)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Particle)
     return return_val
 }
 function wait_for_overlap_and_a (target: Sprite, new_image: Image, kind: number) {
@@ -134,11 +159,13 @@ function animate_screen_leaving (velx: number, vely: number) {
 }
 function prepare_level (level: number) {
     make_player()
-    tiles.loadMap(tiles.copyMap(level_tilemaps[level - 1]))
+    tiles.loadMap(tiles.copyMap(level_tilemaps[level]))
     tiles.placeOnRandomTile(sprite_player, assets.tile`start`)
     tiles.setTileAt(tiles.getTilesByType(assets.tile`start`)[0], assets.tile`transparency8`)
     sprite_things = []
-    if (level == 1) {
+    if (level == 0) {
+        prepare_level_0()
+    } else if (level == 1) {
         prepare_level_1()
     } else if (level == 2) {
         prepare_level_2()
@@ -255,7 +282,7 @@ function run_level_3 () {
     }
     animate_screen_leaving(0, -100)
     fade(true, true)
-    return true
+    return 1
 }
 function run_level_2 () {
     fade(false, false)
@@ -282,7 +309,7 @@ function run_level_2 () {
     }
     animate_screen_leaving(100, 0)
     fade(true, true)
-    return true
+    return 1
 }
 function is_on_location (locs_in_list: any[]) {
     for (let location of locs_in_list) {
@@ -331,13 +358,18 @@ function prepare_level_2 () {
     sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_0`), true, true, assets.image`stump_1`))
     sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_3`), true, true, assets.image`stump_1`))
 }
+function prepare_level_0 () {
+	
+}
+let selected_level = 0
 let sprite_particle: Sprite = null
 let controls_enabled = false
 let sprite_thing: Sprite = null
 let location: any = null
-let return_val = false
-let sprite_player: Sprite = null
 let sprite_tilemap_thing: Sprite = null
+let sprite_player: Sprite = null
+let level_select_tiles: Image[] = []
+let return_val = 0
 let sprite_things: Sprite[] = []
 let level_tilemaps: tiles.WorldMap[] = []
 let spawn_particles = false
@@ -350,12 +382,13 @@ color.Black
 current_level = 0
 in_level = false
 spawn_particles = false
-level_tilemaps = [tiles.createSmallMap(tilemap`level_0`), tiles.createSmallMap(tilemap`level_2`), tiles.createSmallMap(tilemap`level_3`)]
+level_tilemaps = [
+tiles.createSmallMap(tilemap`level_4`),
+tiles.createSmallMap(tilemap`level_0`),
+tiles.createSmallMap(tilemap`level_2`),
+tiles.createSmallMap(tilemap`level_3`)
+]
 scene.setBackgroundColor(15)
-timer.background(function () {
-    prepare_level(3)
-    run_level(3)
-})
 game.onUpdate(function () {
     if (in_level) {
         sprite_player.z = sprite_player.bottom / 100
@@ -394,4 +427,10 @@ game.onUpdate(function () {
     } else {
         sprites.destroyAllSpritesOfKind(SpriteKind.Particle)
     }
+})
+forever(function () {
+    prepare_level(0)
+    selected_level = run_level(0)
+    prepare_level(selected_level)
+    run_level(selected_level)
 })
