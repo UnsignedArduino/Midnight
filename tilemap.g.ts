@@ -54,6 +54,12 @@ namespace myTiles {
     export const tile24 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile25 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile26 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile27 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile28 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -250,7 +256,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . 
-`, [myTiles.transparency8,myTiles.tile1,myTiles.tile3,myTiles.tile2,myTiles.tile4,myTiles.tile5,myTiles.tile8,myTiles.tile23,myTiles.tile24,myTiles.tile25], TileScale.Eight);
+`, [myTiles.transparency8,myTiles.tile1,myTiles.tile3,myTiles.tile2,myTiles.tile4,myTiles.tile5,myTiles.tile8,myTiles.tile23,myTiles.tile24,myTiles.tile25,myTiles.tile26,myTiles.tile27,myTiles.tile28], TileScale.Eight);
         }
         return null;
     })
@@ -309,6 +315,12 @@ namespace myTiles {
             case "tile24":return tile24;
             case "level_3_tile":
             case "tile25":return tile25;
+            case "level_1_tile_overlap":
+            case "tile26":return tile26;
+            case "level_2_tile_overlapped":
+            case "tile27":return tile27;
+            case "level_3_tile_overlapped":
+            case "tile28":return tile28;
         }
         return null;
     })

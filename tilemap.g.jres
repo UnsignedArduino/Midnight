@@ -159,6 +159,24 @@
         "tilemapTile": true,
         "displayName": "level_3_tile"
     },
+    "tile26": {
+        "data": "hwQIAAgAAAAAAAAAAAAAAAAAAAAAAAAAEBERAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "level_1_tile_overlap"
+    },
+    "tile27": {
+        "data": "hwQIAAgAAAAAAAAAAAAAABAQEQAQEBAAEBEQAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "level_2_tile_overlapped"
+    },
+    "tile28": {
+        "data": "hwQIAAgAAAAAAAAAAAAAABAQEAAQEBAAEBERAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "level_3_tile_overlapped"
+    },
     "level2": {
         "id": "level2",
         "mimeType": "application/mkcd-tilemap",
@@ -303,7 +321,10 @@
             "myTiles.tile8",
             "myTiles.tile23",
             "myTiles.tile24",
-            "myTiles.tile25"
+            "myTiles.tile25",
+            "myTiles.tile26",
+            "myTiles.tile27",
+            "myTiles.tile28"
         ],
         "displayName": "level_4"
     },

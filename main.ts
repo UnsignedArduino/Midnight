@@ -28,12 +28,20 @@ function run_level_0 () {
     fade(false, false)
     return_val = 0
     level_select_tiles = [assets.tile`level_1_tile0`, assets.tile`level_2_tile0`, assets.tile`level_3_tile`]
+    level_select_tiles_overlapped = [assets.tile`level_1_tile_overlap`, assets.tile`level_2_tile_overlapped`, assets.tile`level_3_tile_overlapped`]
     while (return_val == 0) {
         pause(0)
         for (let index = 0; index <= level_select_tiles.length - 1; index++) {
-            if (sprite_player.tileKindAt(TileDirection.Center, level_select_tiles[index])) {
-                return_val = index + 1
-                break;
+            if (sprite_player.tileKindAt(TileDirection.Bottom, level_select_tiles[index])) {
+                tiles.setTileAt(sprite_player.tilemapLocation().getNeighboringLocation(CollisionDirection.Bottom), level_select_tiles_overlapped[index])
+            } else if (sprite_player.tileKindAt(TileDirection.Bottom, level_select_tiles_overlapped[index])) {
+                if (controller.A.isPressed()) {
+                    return_val = index + 1
+                    break;
+                }
+            } else {
+                location = tiles.getTilesByType(level_select_tiles_overlapped[index])[0]
+                tiles.setTileAt(location, level_select_tiles[index])
             }
         }
     }
@@ -365,9 +373,10 @@ let selected_level = 0
 let sprite_particle: Sprite = null
 let controls_enabled = false
 let sprite_thing: Sprite = null
-let location: any = null
 let sprite_tilemap_thing: Sprite = null
+let location: any = null
 let sprite_player: Sprite = null
+let level_select_tiles_overlapped: Image[] = []
 let level_select_tiles: Image[] = []
 let return_val = 0
 let sprite_things: Sprite[] = []
