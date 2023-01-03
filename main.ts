@@ -27,8 +27,18 @@ function get_overlapping_sprite (target: Sprite, kind: number) {
 function run_level_0 () {
     fade(false, false)
     return_val = 0
-    level_select_tiles = [assets.tile`level_1_tile0`, assets.tile`level_2_tile0`, assets.tile`level_3_tile`]
-    level_select_tiles_overlapped = [assets.tile`level_1_tile_overlap`, assets.tile`level_2_tile_overlapped`, assets.tile`level_3_tile_overlapped`]
+    level_select_tiles = [
+    assets.tile`level_1_tile0`,
+    assets.tile`level_2_tile0`,
+    assets.tile`level_3_tile`,
+    assets.tile`level_4_tile`
+    ]
+    level_select_tiles_overlapped = [
+    assets.tile`level_1_tile_overlap`,
+    assets.tile`level_2_tile_overlapped`,
+    assets.tile`level_3_tile_overlapped`,
+    assets.tile`level_4_tile_overlapped`
+    ]
     while (return_val == 0) {
         pause(0)
         for (let index = 0; index <= level_select_tiles.length - 1; index++) {
@@ -119,6 +129,8 @@ function run_level (level: number) {
         return_val = run_level_2()
     } else if (level == 3) {
         return_val = run_level_3()
+    } else if (level == 4) {
+        return_val = run_level_4()
     }
     spawn_particles = false
     in_level = false
@@ -146,7 +158,7 @@ function wait_for_overlap_and_a (target: Sprite, new_image: Image, kind: number)
         }
     }
 }
-function make_toggleable_thing (loc_in_list: any[], clear_tile: boolean, wall_tile: boolean, image2: Image) {
+function make_toggleable_thing (loc_in_list: tiles.Location[], clear_tile: boolean, wall_tile: boolean, image2: Image) {
     location = loc_in_list[0]
     if (clear_tile) {
         tiles.setTileAt(location, assets.tile`transparency8`)
@@ -179,6 +191,8 @@ function prepare_level (level: number) {
         prepare_level_2()
     } else if (level == 3) {
         prepare_level_3()
+    } else if (level == 4) {
+        prepare_level_4()
     }
     create_tilemap_things()
 }
@@ -237,7 +251,7 @@ function make_player () {
     )
     scene.cameraFollowSprite(sprite_player)
 }
-function make_untouched_thing (loc_in_list: any[], clear_tile: boolean, wall_tile: boolean, image2: Image) {
+function make_untouched_thing (loc_in_list: tiles.Location[], clear_tile: boolean, wall_tile: boolean, image2: Image) {
     location = loc_in_list[0]
     if (clear_tile) {
         tiles.setTileAt(location, assets.tile`transparency8`)
@@ -251,7 +265,7 @@ function make_untouched_thing (loc_in_list: any[], clear_tile: boolean, wall_til
     sprite_thing.z = sprite_thing.bottom / 100
     return sprite_thing
 }
-function wait_for_location (locs_in_list: any[]) {
+function wait_for_location (locs_in_list: tiles.Location[]) {
     while (true) {
         pause(0)
         for (let location of locs_in_list) {
@@ -319,7 +333,12 @@ function run_level_2 () {
     fade(true, true)
     return 1
 }
-function is_on_location (locs_in_list: any[]) {
+function prepare_level_4 () {
+    sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock`), true, true, assets.image`actual_rock`))
+    sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_1`), true, true, assets.image`stump_1`))
+    sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_0`), true, true, assets.image`stump_1`))
+}
+function is_on_location (locs_in_list: tiles.Location[]) {
     for (let location of locs_in_list) {
         if (sprite_player.tilemapLocation().column != location.column) {
             continue;
@@ -331,7 +350,7 @@ function is_on_location (locs_in_list: any[]) {
     }
     return false
 }
-function set_tiles (locations: any[], tile: Image, wall: boolean) {
+function set_tiles (locations: tiles.Location[], tile: Image, wall: boolean) {
     for (let location of locations) {
         tiles.setTileAt(location, tile)
         tiles.setWallAt(location, wall)
@@ -366,6 +385,41 @@ function prepare_level_2 () {
     sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_0`), true, true, assets.image`stump_1`))
     sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_3`), true, true, assets.image`stump_1`))
 }
+function run_level_4 () {
+    fade(false, false)
+    while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
+        pause(0)
+        if (is_overlapping_and_a(sprite_things[0], assets.image`rock_pressed`, SpriteKind.ToggleableThing)) {
+            set_tiles([tiles.getTileLocation(13, 10)], assets.tile`left_left_fence_gate_open`, false)
+            set_tiles([tiles.getTileLocation(13, 11)], assets.tile`right_left_fence_gate_open`, false)
+            tiles.setWallAt(tiles.getTileLocation(13, 9), false)
+            set_tiles([tiles.getTileLocation(9, 10)], assets.tile`left_right_fence_gate_closed`, true)
+            set_tiles([tiles.getTileLocation(9, 11)], assets.tile`left_left_fence_gate_closed0`, true)
+            tiles.setWallAt(tiles.getTileLocation(9, 9), true)
+        } else if (is_overlapping_and_a(sprite_things[0], assets.image`actual_rock`, SpriteKind.OnToggleableThing)) {
+            set_tiles([tiles.getTileLocation(13, 10)], assets.tile`left_left_fence_gate_closed`, true)
+            set_tiles([tiles.getTileLocation(13, 11)], assets.tile`right_left_fence_gate_closed`, true)
+            tiles.setWallAt(tiles.getTileLocation(13, 9), true)
+            set_tiles([tiles.getTileLocation(9, 10)], assets.tile`left_right_fence_gate_open`, false)
+            set_tiles([tiles.getTileLocation(9, 11)], assets.tile`right_right_fence_gate_open`, false)
+            tiles.setWallAt(tiles.getTileLocation(9, 9), false)
+        } else if (is_overlapping_and_a(sprite_things[1], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
+        	
+        } else if (is_overlapping_and_a(sprite_things[2], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
+            set_tiles([tiles.getTileLocation(6, 10)], assets.tile`left_right_fence_gate_open`, false)
+            set_tiles([tiles.getTileLocation(6, 11)], assets.tile`right_right_fence_gate_open`, false)
+            tiles.setWallAt(tiles.getTileLocation(6, 9), false)
+        } else {
+        	
+        }
+        if (controller.A.isPressed()) {
+            wait_for_button(false, true)
+        }
+    }
+    animate_screen_leaving(-100, 0)
+    fade(true, true)
+    return 1
+}
 function prepare_level_0 () {
 	
 }
@@ -374,7 +428,7 @@ let sprite_particle: Sprite = null
 let controls_enabled = false
 let sprite_thing: Sprite = null
 let sprite_tilemap_thing: Sprite = null
-let location: any = null
+let location: tiles.Location = null
 let sprite_player: Sprite = null
 let level_select_tiles_overlapped: Image[] = []
 let level_select_tiles: Image[] = []
@@ -395,7 +449,8 @@ level_tilemaps = [
 tiles.createSmallMap(tilemap`level_4`),
 tiles.createSmallMap(tilemap`level_0`),
 tiles.createSmallMap(tilemap`level_2`),
-tiles.createSmallMap(tilemap`level_3`)
+tiles.createSmallMap(tilemap`level_3`),
+tiles.createSmallMap(tilemap`level_5`)
 ]
 scene.setBackgroundColor(15)
 game.onUpdate(function () {
