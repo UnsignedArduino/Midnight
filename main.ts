@@ -73,6 +73,31 @@ function run_level_0 () {
     fade(true, true)
     return return_val
 }
+function check_if_need_to_reset () {
+    if (sprite_player.tileKindAt(TileDirection.Bottom, assets.tile`reset_tile`)) {
+        tiles.setTileAt(sprite_player.tilemapLocation().getNeighboringLocation(CollisionDirection.Bottom), assets.tile`reset_tile_selected`)
+    } else if (sprite_player.tileKindAt(TileDirection.Bottom, assets.tile`reset_tile_selected`)) {
+        if (controller.A.isPressed()) {
+            return true
+        }
+    } else if (sprite_player.tileKindAt(TileDirection.Center, assets.tile`reset_tile`)) {
+        tiles.setTileAt(sprite_player.tilemapLocation(), assets.tile`reset_tile_selected`)
+    } else if (sprite_player.tileKindAt(TileDirection.Center, assets.tile`reset_tile_selected`)) {
+        if (controller.A.isPressed()) {
+            return true
+        }
+    } else if (sprite_player.tileKindAt(TileDirection.Top, assets.tile`reset_tile`)) {
+        tiles.setTileAt(sprite_player.tilemapLocation().getNeighboringLocation(CollisionDirection.Top), assets.tile`reset_tile_selected`)
+    } else if (sprite_player.tileKindAt(TileDirection.Top, assets.tile`reset_tile_selected`)) {
+        if (controller.A.isPressed()) {
+            return true
+        }
+    } else {
+        location = tiles.getTilesByType(assets.tile`reset_tile_selected`)[0]
+        tiles.setTileAt(location, assets.tile`reset_tile`)
+    }
+    return false
+}
 function swap_tile (old_tile: Image, new_tile: Image, do_wall: boolean) {
     for (let location of tiles.getTilesByType(old_tile)) {
         tiles.setTileAt(location, new_tile)
