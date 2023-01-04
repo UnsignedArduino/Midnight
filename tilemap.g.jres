@@ -341,36 +341,6 @@
         ],
         "displayName": "level13"
     },
-    "level12": {
-        "id": "level12",
-        "mimeType": "application/mkcd-tilemap",
-        "data": "MDgxNDAwMGYwMDA3MDAwNjAwMDkwMDAwMDAwMDA2MDgwMDAwMDAwMDBhMDAwOTAwMDAwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwODA2MDAwMDBhMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMwMDAwMDAwMDAwMDgwMDBlMDAwMDA2MDAwMDAwMGEwMDA2MDAwMDAzMDAwMDE1MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMzAwMDAwMDAwMDIwMDAwMDAwYTAwMDAwMDA2MDAwMDAwMDAwMDAwMDMwMDAwMTQwNjAwMDAwMDAwMDAwZDAwMDAwMDAwMDAwMDAwMDAwMDAzMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNjAwMDAwNzAwMDAwMzAwMDEwMTAxMDEwMTAxMDEwMTAxMGMwMDAwMDAwMzAxMDEwMTAxMDMwNjAwMDAwMDA3MDAwMDBjMDAwMDBjMDAwMDAwMDMwMDAwMDAwYTAzMDAwMDA2MDAwMDAwMGIwNDAwMDAxMjAwMDAwMDEwMDYwMDBmMDAwMzAwMDAwMDA2MDYwMDBiMDUwMDAwMTMwMDA2MDAxMTAwMDAwMDAwMDMwMDAwMDAwMDAwMDAwMDBjMDAwMDBjMDAwMDAwMDMwMDAwMDAwMDAzMDAwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwOTAwMDAwMDAwMDkwMDA2MDAwMDAwMDAwMDAwMDcwYTAwMDAwMDAwMDAwYTAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIyMjIyMjIyMjIyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMDAwMDAwMDAyMDAwMDAwMDAwMDAwMDAwMDAwMDIwMDAwMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMDAwMDAwMDAyMDAwMDAwMDAwMDAwMDAwMDAwMDIyMjIyMjIyMjIyMDAyMDIyMjIwMjAwMDAwMDAyMDAwMDIwMDAwMDAyMDAwMDAwMDIwMDAwMjAwMDAwMDIwMDAwMDAwMjAwMDAyMDAwMDAwMjAwMDAwMDAyMjAwMDIwMDAwMDAyMjIyMjIyMjIyMjIyMjIyMjIyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA==",
-        "tileset": [
-            "myTiles.transparency8",
-            "myTiles.tile8",
-            "myTiles.tile18",
-            "myTiles.tile16",
-            "myTiles.tile31",
-            "myTiles.tile32",
-            "myTiles.tile1",
-            "myTiles.tile3",
-            "myTiles.tile2",
-            "myTiles.tile4",
-            "myTiles.tile5",
-            "myTiles.tile13",
-            "myTiles.tile22",
-            "myTiles.tile6",
-            "myTiles.tile7",
-            "myTiles.tile14",
-            "myTiles.tile17",
-            "myTiles.tile19",
-            "myTiles.tile33",
-            "myTiles.tile34",
-            "myTiles.tile35",
-            "myTiles.tile36"
-        ],
-        "displayName": "level_5"
-    },
     "level9": {
         "id": "level9",
         "mimeType": "application/mkcd-tilemap",
@@ -393,35 +363,6 @@
             "myTiles.tile37"
         ],
         "displayName": "level_3"
-    },
-    "level7": {
-        "id": "level7",
-        "mimeType": "application/mkcd-tilemap",
-        "data": "MDgxNDAwMGYwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNDAwMDAwMTAwMDAwMDAzMDAwMTAwMDAwNDAwMDAwMDAyMDAwMDAwMDAwMzAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMzAwMDAwMDAwMDQwMDAwMDAwMDAwMDIwMDAwMDAwMDAyMDAwMDAwMDAwMDAxMDAwMDAwMDAwMDAwMDQwMDAwMDAwNTA1MDUwNTA1MDYwNzA1MDUwNTA1MDUwNTA1MDMwNTA1MDUwNTA1MDAwMDAwMDAwMDAwMTQwMTBiMDAwMDBiMDAwMDBiMDAwMDAwMDAwMDAwMDEwMDAwMDAwMDAwMDAwYjAwMDEwYjAwMDAwYjAxMDAwMDAwMDAwMDAwMDAwMDBjMDEwMDAwMGIwMDAwMGIwMDAwMGIwMDAyMDAwNDAwMDAwMDA4MDAwMDAwMDAwMDBiMDAwMDBiMDAwMDBiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwZTAwMDAxMDAwMDAwZTBkMDAwMDAwMDAwMDAwMDAwMDA5MDAwMDAwMGYwMDAxMTEwMDAwMGYwZDAwMDAwMDAwMDAwMDAwMDQwMDAwMDAwMDBiMDAwMDBiMDAwMDBiMDAwMDAwMDEwMDAwMGEwMDAwMDAwMDAwMDAwYjAwMDAwYjAwMDAwYjAwMDAwMDAwMDAwMDAwMDAwMDEzMDExMjAwMGIwMDAwMGIwMDAwMGIwMDA0MDAwMzAwMDAwMDAwMDAwMDAwMDAwMDBiMDAwMDBiMTQwMDBiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIyMjIyMjIyMDIyMjIwMDAwMDAwMDAyMjAwMDAyMDAwMDAwMDAwMDAwMDIyMDAwMDIwMDAwMDAwMDAwMDAwMjIwMDAwMjAwMDAwMDAwMDAwMDAyMDAwMDAyMDAwMDAwMDAwMDAwMDIwMDAwMDIwMDAwMDAwMDAwMDAwMjAwMDAwMjAwMDAwMDAwMDAwMDAyMjAwMDAyMDAwMDAwMDAwMDAwMDIyMDAwMDIwMDAwMDAwMDAwMDAwMjIwMDAwMjAwMDAwMDAwMDAwMDAyMjAwMDAyMDAwMA==",
-        "tileset": [
-            "myTiles.transparency8",
-            "myTiles.tile1",
-            "myTiles.tile3",
-            "myTiles.tile2",
-            "myTiles.tile5",
-            "myTiles.tile8",
-            "myTiles.tile9",
-            "myTiles.tile10",
-            "myTiles.tile7",
-            "myTiles.tile14",
-            "myTiles.tile15",
-            "myTiles.tile16",
-            "myTiles.tile18",
-            "myTiles.tile13",
-            "myTiles.tile17",
-            "myTiles.tile19",
-            "myTiles.tile20",
-            "myTiles.tile21",
-            "myTiles.tile36",
-            "myTiles.tile37",
-            "myTiles.tile4"
-        ],
-        "displayName": "level_2"
     },
     "level3": {
         "id": "level3",
@@ -448,6 +389,65 @@
             "myTiles.tile40"
         ],
         "displayName": "level_0"
+    },
+    "level7": {
+        "id": "level7",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MDgxNDAwMGYwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNDAwMDAwMTAwMDAwMDAzMDAwMTAwMDAwNDAwMDAwMDAyMDAwMDAwMDAwMzAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMzAwMDAwMDAwMDQwMDAwMDAwMDAwMDIwMDAwMDAwMDAyMDAwMDAwMDAwMDAxMDAwMDAwMDAwMDAwMDQwMDAwMDAwNTA1MDUwNTA1MDYwNzA1MDUwNTA1MDUwNTA1MDMwNTA1MDUwNTA1MDAwMDAwMDAwMDAwMTQwMTBiMDAwMDBiMDAwMDBiMDAwMDAwMDAwMDAwMDEwMDAwMDAwMDAwMDAwYjAwMDEwYjAwMDAwYjAxMDAwMDAwMDAwMDAwMDAwMDBjMDEwMDAwMGIwMDAwMGIwMDAwMGIwMDAyMDAwNDAwMDAwMDA4MDAwMDAwMDAwMDBiMDAwMDBiMDAwMDBiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwZTAwMDAxMDAwMDAwZTBkMDAwMDAwMDAwMDAwMDAwMDA5MDAwMDAwMGYwMDAxMTEwMDAwMGYwZDAwMDAwMDAwMDAwMDAwMDQwMDAwMDAwMDBiMDAwMDBiMDAwMDBiMDAwMDAwMDEwMDAwMGEwMDAwMDAwMDAwMDAwYjAwMDAwYjAwMDAwYjAwMDAwMDAwMDAwMDAwMDAwMDEzMDExMjAwMGIwMDAwMGIwMDAwMGIwMDA0MDAwMzAwMDAwMDAwMDAwMDAwMDAwMDBiMDAwMDBiMTQwMDBiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIyMjIyMjIyMDIyMjIwMDAwMDAwMDAyMjAwMDAyMDAwMDAwMDAwMDAwMDIyMDAwMDIwMDAwMDAwMDAwMDAwMjIwMDAwMjAwMDAwMDAwMDAwMDAyMjAwMDAyMDAwMDAwMDAwMDAwMDIwMDAwMDIwMDAwMDAwMDAwMDAwMjAwMDAwMjAwMDAwMDAwMDAwMDAyMjAwMDAyMDAwMDAwMDAwMDAwMDIyMDAwMDIwMDAwMDAwMDAwMDAwMjIwMDAwMjAwMDAwMDAwMDAwMDAyMjAwMDAyMDAwMA==",
+        "tileset": [
+            "myTiles.transparency8",
+            "myTiles.tile1",
+            "myTiles.tile3",
+            "myTiles.tile2",
+            "myTiles.tile5",
+            "myTiles.tile8",
+            "myTiles.tile9",
+            "myTiles.tile10",
+            "myTiles.tile7",
+            "myTiles.tile14",
+            "myTiles.tile15",
+            "myTiles.tile16",
+            "myTiles.tile18",
+            "myTiles.tile13",
+            "myTiles.tile17",
+            "myTiles.tile19",
+            "myTiles.tile20",
+            "myTiles.tile21",
+            "myTiles.tile36",
+            "myTiles.tile37",
+            "myTiles.tile4"
+        ],
+        "displayName": "level_2"
+    },
+    "level12": {
+        "id": "level12",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MDgxNDAwMGYwMDA3MDAwNjAwMDkwMDAwMDAwMDA2MDgwMDAwMDAwMDBhMDAwOTAwMDAwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwODA2MDAwMDBhMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMwMDAwMDAwMDAwMDgwMDBlMDAwMDA2MDAwMDAwMGEwMDA2MDAwMDAzMDAwMDE1MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMzAwMDAwMDAwMDIwMDAwMDAwYTAwMDAwMDA2MDAwMDAwMDAwMDAwMDMwMDAwMTQwNjAwMDAwMDAwMDAwZDAwMDAwMDAwMDAwMDAwMDAwMDAzMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNjAwMDAwNzAwMDAwMzAwMDEwMTAxMDEwMTAxMDEwMTAxMGMwMDAwMDAwMzAxMDEwMTAxMDMwNjAwMDAwMDA3MDAwMDBjMDAwMDBjMDAwMDAwMDMwMDAwMDAwYTAzMDAwMDA2MDAwMDAwMGIwNDAwMDAxMjAwMDAwMDEwMDYwMDBmMDAwMzAwMDAwMDA2MDYwMDBiMDUwMDAwMTMwMDA2MDAxMTAwMDAwMDAwMDMwMDAwMDAwMDAwMDAwMDBjMDAwMDBjMDAwMDAwMDMwMDAwMDAwMDAzMDAwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwOTAwMDAwMDAwMDkwMDA2MDAwMDAwMDAwMDAwMDcwYTAwMDAwMDAwMDAwYTAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIyMjIyMjIyMjIyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMDAwMDAwMDAyMDAwMDAwMDAwMDAwMDAwMDAwMDIwMDAwMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMDAwMDAwMDAyMDAwMDAwMDAwMDAwMDAwMDAwMDIyMjIyMjIyMjIyMDAyMDIyMjIwMjAwMDAwMDAyMjAwMDIwMDAwMDAyMDAwMDAwMDIwMDAwMjAwMDAwMDIwMDAwMDAwMjAwMDAyMDAwMDAwMjAwMDAwMDAyMjAwMDIwMDAwMDAyMjIyMjIyMjIyMjIyMjIyMjIyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA==",
+        "tileset": [
+            "myTiles.transparency8",
+            "myTiles.tile8",
+            "myTiles.tile18",
+            "myTiles.tile16",
+            "myTiles.tile31",
+            "myTiles.tile32",
+            "myTiles.tile1",
+            "myTiles.tile3",
+            "myTiles.tile2",
+            "myTiles.tile4",
+            "myTiles.tile5",
+            "myTiles.tile13",
+            "myTiles.tile22",
+            "myTiles.tile6",
+            "myTiles.tile7",
+            "myTiles.tile14",
+            "myTiles.tile17",
+            "myTiles.tile19",
+            "myTiles.tile33",
+            "myTiles.tile34",
+            "myTiles.tile35",
+            "myTiles.tile36"
+        ],
+        "displayName": "level_5"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",
