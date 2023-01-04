@@ -49,6 +49,20 @@ function run_level_0 () {
                     return_val = index + 1
                     break;
                 }
+            } else if (sprite_player.tileKindAt(TileDirection.Center, level_select_tiles[index])) {
+                tiles.setTileAt(sprite_player.tilemapLocation(), level_select_tiles_overlapped[index])
+            } else if (sprite_player.tileKindAt(TileDirection.Center, level_select_tiles_overlapped[index])) {
+                if (controller.A.isPressed()) {
+                    return_val = index + 1
+                    break;
+                }
+            } else if (sprite_player.tileKindAt(TileDirection.Top, level_select_tiles[index])) {
+                tiles.setTileAt(sprite_player.tilemapLocation().getNeighboringLocation(CollisionDirection.Top), level_select_tiles_overlapped[index])
+            } else if (sprite_player.tileKindAt(TileDirection.Top, level_select_tiles_overlapped[index])) {
+                if (controller.A.isPressed()) {
+                    return_val = index + 1
+                    break;
+                }
             } else {
                 location = tiles.getTilesByType(level_select_tiles_overlapped[index])[0]
                 tiles.setTileAt(location, level_select_tiles[index])
