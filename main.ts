@@ -19,6 +19,11 @@ function run_level_1 () {
             fade(true, true)
             return -1
         }
+        if (check_if_need_to_exit_left()) {
+            animate_screen_leaving(-100, 0)
+            fade(true, true)
+            return -2
+        }
         if (controller.A.isPressed()) {
             wait_for_button(false, true)
         }
@@ -85,29 +90,7 @@ function run_level_0 () {
     return return_val
 }
 function check_if_need_to_reset () {
-    if (sprite_player.tileKindAt(TileDirection.Bottom, assets.tile`reset_tile`)) {
-        tiles.setTileAt(sprite_player.tilemapLocation().getNeighboringLocation(CollisionDirection.Bottom), assets.tile`reset_tile_selected`)
-    } else if (sprite_player.tileKindAt(TileDirection.Bottom, assets.tile`reset_tile_selected`)) {
-        if (controller.A.isPressed()) {
-            return true
-        }
-    } else if (sprite_player.tileKindAt(TileDirection.Center, assets.tile`reset_tile`)) {
-        tiles.setTileAt(sprite_player.tilemapLocation(), assets.tile`reset_tile_selected`)
-    } else if (sprite_player.tileKindAt(TileDirection.Center, assets.tile`reset_tile_selected`)) {
-        if (controller.A.isPressed()) {
-            return true
-        }
-    } else if (sprite_player.tileKindAt(TileDirection.Top, assets.tile`reset_tile`)) {
-        tiles.setTileAt(sprite_player.tilemapLocation().getNeighboringLocation(CollisionDirection.Top), assets.tile`reset_tile_selected`)
-    } else if (sprite_player.tileKindAt(TileDirection.Top, assets.tile`reset_tile_selected`)) {
-        if (controller.A.isPressed()) {
-            return true
-        }
-    } else {
-        location = tiles.getTilesByType(assets.tile`reset_tile_selected`)[0]
-        tiles.setTileAt(location, assets.tile`reset_tile`)
-    }
-    return false
+    return player_on_button_tile_and_press_a(assets.tile`reset_tile`, assets.tile`reset_tile_selected`)
 }
 function swap_tile (old_tile: Image, new_tile: Image, do_wall: boolean) {
     for (let location of tiles.getTilesByType(old_tile)) {
@@ -165,6 +148,9 @@ function wait_for_button (press: boolean, check_for_on_target: boolean) {
             }
         }
     }
+}
+function check_if_need_to_exit_left () {
+    return player_on_button_tile_and_press_a(assets.tile`exit_left_tile0`, assets.tile`exit_left_tile_selected`)
 }
 function run_level (level: number) {
     current_level = level
@@ -268,6 +254,9 @@ function prepare_level (level: number) {
         prepare_level_4()
     }
     create_tilemap_things()
+}
+function check_if_need_to_exit_bottom () {
+    return player_on_button_tile_and_press_a(assets.tile`exit_down_tile`, assets.tile`exit_down_tile_selected`)
 }
 function prepare_level_1 () {
     sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_1`), true, true, assets.image`stump_1`))
@@ -376,6 +365,11 @@ function run_level_3 () {
             fade(true, true)
             return -1
         }
+        if (check_if_need_to_exit_bottom()) {
+            animate_screen_leaving(0, 100)
+            fade(true, true)
+            return -2
+        }
         if (controller.A.isPressed()) {
             wait_for_button(false, true)
         }
@@ -404,6 +398,11 @@ function run_level_2 () {
             enable_controls(false)
             fade(true, true)
             return -1
+        }
+        if (check_if_need_to_exit_bottom()) {
+            animate_screen_leaving(0, 100)
+            fade(true, true)
+            return -2
         }
         if (controller.A.isPressed()) {
             wait_for_button(false, true)
@@ -489,6 +488,11 @@ function run_level_4 () {
             fade(true, true)
             return -1
         }
+        if (check_if_need_to_exit_left()) {
+            animate_screen_leaving(-100, 0)
+            fade(true, true)
+            return -2
+        }
         if (controller.A.isPressed()) {
             wait_for_button(false, true)
         }
@@ -499,6 +503,31 @@ function run_level_4 () {
 }
 function prepare_level_0 () {
 	
+}
+function player_on_button_tile_and_press_a (tile: Image, tile_selected: Image) {
+    if (sprite_player.tileKindAt(TileDirection.Bottom, tile)) {
+        tiles.setTileAt(sprite_player.tilemapLocation().getNeighboringLocation(CollisionDirection.Bottom), tile_selected)
+    } else if (sprite_player.tileKindAt(TileDirection.Bottom, tile_selected)) {
+        if (controller.A.isPressed()) {
+            return true
+        }
+    } else if (sprite_player.tileKindAt(TileDirection.Center, tile)) {
+        tiles.setTileAt(sprite_player.tilemapLocation(), tile_selected)
+    } else if (sprite_player.tileKindAt(TileDirection.Center, tile_selected)) {
+        if (controller.A.isPressed()) {
+            return true
+        }
+    } else if (sprite_player.tileKindAt(TileDirection.Top, tile)) {
+        tiles.setTileAt(sprite_player.tilemapLocation().getNeighboringLocation(CollisionDirection.Top), tile_selected)
+    } else if (sprite_player.tileKindAt(TileDirection.Top, tile_selected)) {
+        if (controller.A.isPressed()) {
+            return true
+        }
+    } else {
+        location = tiles.getTilesByType(tile_selected)[0]
+        tiles.setTileAt(location, tile)
+    }
+    return false
 }
 let selected_level = 0
 let skip_level_select = false
