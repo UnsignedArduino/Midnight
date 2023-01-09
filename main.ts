@@ -6,6 +6,9 @@ namespace SpriteKind {
     export const OnToggleableThing = SpriteKind.create()
     export const Particle = SpriteKind.create()
 }
+function check_if_need_to_exit_right () {
+    return player_on_button_tile_and_press_a(assets.tile`exit_right_tile0`, assets.tile`exit_right_tile_overlapping`)
+}
 function run_level_1 () {
     fade(false, false)
     while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
@@ -107,12 +110,39 @@ function run_level_5 () {
     fade(false, false)
     while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
         pause(0)
+        if (is_overlapping_and_a(sprite_things[0], assets.image`rock_pressed`, SpriteKind.ToggleableThing)) {
+        	
+        } else if (is_overlapping_and_a(sprite_things[0], assets.image`actual_rock`, SpriteKind.OnToggleableThing)) {
+        	
+        }
+        if (is_overlapping_and_a(sprite_things[1], assets.image`rock_pressed`, SpriteKind.ToggleableThing)) {
+            if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
+                set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_open`, false)
+                set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_open`, false)
+            }
+        } else if (is_overlapping_and_a(sprite_things[1], assets.image`actual_rock`, SpriteKind.OnToggleableThing)) {
+            if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
+                set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_closed`, true)
+                set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_closed`, true)
+            }
+        }
+        if (is_overlapping_and_a(sprite_things[2], assets.image`rock_pressed`, SpriteKind.ToggleableThing)) {
+            if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
+                set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_open`, false)
+                set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_open`, false)
+            }
+        } else if (is_overlapping_and_a(sprite_things[2], assets.image`actual_rock`, SpriteKind.OnToggleableThing)) {
+            if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
+                set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_closed`, true)
+                set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_closed`, true)
+            }
+        }
         if (check_if_need_to_reset()) {
             fade(true, true)
             return -1
         }
-        if (check_if_need_to_exit_left()) {
-            animate_screen_leaving(-100, 0)
+        if (check_if_need_to_exit_right()) {
+            animate_screen_leaving(100, 0)
             fade(true, true)
             return -2
         }
@@ -120,7 +150,7 @@ function run_level_5 () {
             wait_for_button(false, true)
         }
     }
-    animate_screen_leaving(-100, 0)
+    animate_screen_leaving(100, 0)
     fade(true, true)
     return 1
 }
@@ -146,19 +176,7 @@ function spawn_tilemap_thing (tile: Image, thing_image: Image) {
     }
 }
 function is_overlapping_and_a (target: Sprite, new_image: Image, kind: number) {
-    if (sprite_player.overlapsWith(target) && target.kind() == kind && controller.A.isPressed()) {
-        if (target.kind() == SpriteKind.UntouchedThing) {
-            target.setKind(SpriteKind.TouchedThing)
-        } else if (target.kind() == SpriteKind.ToggleableThing) {
-            target.setKind(SpriteKind.OnToggleableThing)
-        } else if (target.kind() == SpriteKind.OnToggleableThing) {
-            target.setKind(SpriteKind.ToggleableThing)
-        }
-        target.setImage(new_image)
-        return true
-    } else {
-        return false
-    }
+    return is_condition(target, new_image, kind, sprite_player.overlapsWith(target) && target.kind() == kind && controller.A.isPressed())
 }
 function wait_for_button (press: boolean, check_for_on_target: boolean) {
     if (press) {
@@ -181,6 +199,21 @@ function wait_for_button (press: boolean, check_for_on_target: boolean) {
                 pause(0)
             }
         }
+    }
+}
+function is_condition (target: Sprite, new_image: Image, kind: number, condition: boolean) {
+    if (condition) {
+        if (target.kind() == SpriteKind.UntouchedThing) {
+            target.setKind(SpriteKind.TouchedThing)
+        } else if (target.kind() == SpriteKind.ToggleableThing) {
+            target.setKind(SpriteKind.OnToggleableThing)
+        } else if (target.kind() == SpriteKind.OnToggleableThing) {
+            target.setKind(SpriteKind.ToggleableThing)
+        }
+        target.setImage(new_image)
+        return true
+    } else {
+        return false
     }
 }
 function check_if_need_to_exit_left () {
@@ -427,7 +460,9 @@ function run_level_3 () {
     return 1
 }
 function prepare_level_5 () {
-	
+    sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock`), true, true, assets.image`actual_rock`))
+    sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock_0`), true, true, assets.image`actual_rock`))
+    sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock_3`), true, true, assets.image`actual_rock`))
 }
 function run_level_2 () {
     fade(false, false)
