@@ -138,6 +138,7 @@ function run_level_5 () {
             }
         }
         if (check_if_need_to_reset()) {
+            enable_controls(false)
             fade(true, true)
             return -1
         }
@@ -571,6 +572,7 @@ function run_level_4 () {
             set_tiles([tiles.getTileLocation(6, 11)], assets.tile`right_right_fence_gate_open`, false)
         }
         if (check_if_need_to_reset()) {
+            enable_controls(false)
             fade(true, true)
             return -1
         }
