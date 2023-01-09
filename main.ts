@@ -101,6 +101,17 @@ function swap_tile (old_tile: Image, new_tile: Image, do_wall: boolean) {
 function prepare_level_3 () {
     sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock`), true, true, assets.image`actual_rock`))
 }
+function add_label (text: string, top: number, left: number, relative: boolean, ghost: boolean, size: number) {
+    text_sprite = textsprite.create(text, 15, 1)
+    text_sprite.setMaxFontHeight(size)
+    text_sprite.setBorder(0, 1, 2)
+    text_sprite.top = top
+    text_sprite.left = left
+    text_sprite.z = 50
+    text_sprite.setFlag(SpriteFlag.Ghost, ghost)
+    text_sprite.setFlag(SpriteFlag.RelativeToCamera, relative)
+    return text_sprite
+}
 function spawn_tilemap_thing (tile: Image, thing_image: Image) {
     for (let location of tiles.getTilesByType(tile)) {
         tiles.setTileAt(location, assets.tile`transparency8`)
@@ -178,6 +189,7 @@ function run_level (level: number) {
     sprites.destroyAllSpritesOfKind(SpriteKind.ToggleableThing)
     sprites.destroyAllSpritesOfKind(SpriteKind.OnToggleableThing)
     sprites.destroyAllSpritesOfKind(SpriteKind.Particle)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Text)
     return return_val
 }
 function wait_for_overlap_and_a (target: Sprite, new_image: Image, kind: number) {
@@ -502,7 +514,9 @@ function run_level_4 () {
     return 1
 }
 function prepare_level_0 () {
-	
+    add_label("Midnight", 4, 4, true, true, 16)
+    add_label("A puzzle game by", 24, 4, true, true, 8)
+    add_label("UnsignedArduino", 36, 4, true, true, 8)
 }
 function player_on_button_tile_and_press_a (tile: Image, tile_selected: Image) {
     if (sprite_player.tileKindAt(TileDirection.Bottom, tile)) {
@@ -535,6 +549,7 @@ let sprite_particle: Sprite = null
 let controls_enabled = false
 let sprite_thing: Sprite = null
 let sprite_tilemap_thing: Sprite = null
+let text_sprite: TextSprite = null
 let location: tiles.Location = null
 let sprite_player: Sprite = null
 let level_select_tiles_overlapped: Image[] = []
@@ -553,7 +568,7 @@ current_level = 0
 in_level = false
 spawn_particles = false
 level_tilemaps = [
-tiles.createSmallMap(tilemap`level_4`),
+tiles.createSmallMap(tilemap`level_00`),
 tiles.createSmallMap(tilemap`level_0`),
 tiles.createSmallMap(tilemap`level_2`),
 tiles.createSmallMap(tilemap`level_3`),
