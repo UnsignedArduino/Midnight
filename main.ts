@@ -590,9 +590,10 @@ function run_level_4 () {
     return 1
 }
 function prepare_level_0 () {
-    add_label("Midnight", 4, 4, true, true, 16)
-    add_label("A puzzle game by", 24, 4, true, true, 8)
-    add_label("UnsignedArduino", 36, 4, true, true, 8)
+    add_label("Midnight", 4, 4, true, true, 16).z = 0
+    add_label("A puzzle game by", 24, 4, true, true, 8).z = 0
+    add_label("UnsignedArduino", 36, 4, true, true, 8).z = 0
+    add_label("Select a level:", 90, 8, true, true, 8).z = 0
 }
 function player_on_button_tile_and_press_a (tile: Image, tile_selected: Image) {
     if (sprite_player.tileKindAt(TileDirection.Bottom, tile)) {
