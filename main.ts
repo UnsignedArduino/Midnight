@@ -47,13 +47,15 @@ function run_level_0 () {
     assets.tile`level_1_tile0`,
     assets.tile`level_2_tile0`,
     assets.tile`level_3_tile`,
-    assets.tile`level_4_tile`
+    assets.tile`level_4_tile`,
+    assets.tile`level_5_tile`
     ]
     level_select_tiles_overlapped = [
     assets.tile`level_1_tile_overlap`,
     assets.tile`level_2_tile_overlapped`,
     assets.tile`level_3_tile_overlapped`,
-    assets.tile`level_4_tile_overlapped`
+    assets.tile`level_4_tile_overlapped`,
+    assets.tile`level_5_tile_overlapped`
     ]
     while (return_val == 0) {
         pause(0)
@@ -100,6 +102,27 @@ function swap_tile (old_tile: Image, new_tile: Image, do_wall: boolean) {
 }
 function prepare_level_3 () {
     sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock`), true, true, assets.image`actual_rock`))
+}
+function run_level_5 () {
+    fade(false, false)
+    while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
+        pause(0)
+        if (check_if_need_to_reset()) {
+            fade(true, true)
+            return -1
+        }
+        if (check_if_need_to_exit_left()) {
+            animate_screen_leaving(-100, 0)
+            fade(true, true)
+            return -2
+        }
+        if (controller.A.isPressed()) {
+            wait_for_button(false, true)
+        }
+    }
+    animate_screen_leaving(-100, 0)
+    fade(true, true)
+    return 1
 }
 function add_label (text: string, top: number, left: number, relative: boolean, ghost: boolean, size: number) {
     text_sprite = textsprite.create(text, 15, 1)
@@ -178,6 +201,8 @@ function run_level (level: number) {
         return_val = run_level_3()
     } else if (level == 4) {
         return_val = run_level_4()
+    } else if (level == 5) {
+        return_val = run_level_5()
     }
     spawn_particles = false
     in_level = false
@@ -239,7 +264,16 @@ function prepare_level (level: number) {
     assets.tile`left_left_fence_gate_closed0`,
     assets.tile`front_fence`,
     assets.tile`left_facing_fence`,
-    assets.tile`right_facing_fence`
+    assets.tile`right_facing_fence`,
+    assets.tile`left_side_river2`,
+    assets.tile`right_side_river0`,
+    assets.tile`top_side_river0`,
+    assets.tile`bottom_side_river`,
+    assets.tile`center_side_river`,
+    assets.tile`top_left_side_river0`,
+    assets.tile`top_right_side_river0`,
+    assets.tile`bottom_right_side_river0`,
+    assets.tile`bottom_left_side_river`
     ]) {
         swap_tile(value, value, true)
     }
@@ -264,6 +298,8 @@ function prepare_level (level: number) {
         prepare_level_3()
     } else if (level == 4) {
         prepare_level_4()
+    } else if (level == 5) {
+        prepare_level_5()
     }
     create_tilemap_things()
 }
@@ -389,6 +425,9 @@ function run_level_3 () {
     animate_screen_leaving(0, -100)
     fade(true, true)
     return 1
+}
+function prepare_level_5 () {
+	
 }
 function run_level_2 () {
     fade(false, false)
@@ -568,10 +607,11 @@ current_level = 0
 in_level = false
 spawn_particles = false
 level_tilemaps = [
-tiles.createSmallMap(tilemap`level_00`),
+tiles.createSmallMap(tilemap`level_6`),
 tiles.createSmallMap(tilemap`level_0`),
 tiles.createSmallMap(tilemap`level_2`),
 tiles.createSmallMap(tilemap`level_3`),
+tiles.createSmallMap(tilemap`level_4`),
 tiles.createSmallMap(tilemap`level_5`)
 ]
 scene.setBackgroundColor(15)
