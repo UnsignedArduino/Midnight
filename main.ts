@@ -117,24 +117,44 @@ function run_level_5 () {
         }
         if (is_overlapping_and_a(sprite_things[1], assets.image`rock_pressed`, SpriteKind.ToggleableThing)) {
             if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
-                set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_open`, false)
-                set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_open`, false)
+                if (tiles.tileIs(tiles.getTileLocation(14, 11), assets.tile`left_left_fence_gate_closed`)) {
+                    set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_open`, false)
+                    set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_open`, false)
+                } else {
+                    set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_closed`, true)
+                    set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_closed`, true)
+                }
             }
         } else if (is_overlapping_and_a(sprite_things[1], assets.image`actual_rock`, SpriteKind.OnToggleableThing)) {
             if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
-                set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_closed`, true)
-                set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_closed`, true)
+                if (tiles.tileIs(tiles.getTileLocation(14, 11), assets.tile`left_left_fence_gate_closed`)) {
+                    set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_open`, false)
+                    set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_open`, false)
+                } else {
+                    set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_closed`, true)
+                    set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_closed`, true)
+                }
             }
         }
         if (is_overlapping_and_a(sprite_things[2], assets.image`rock_pressed`, SpriteKind.ToggleableThing)) {
             if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
-                set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_open`, false)
-                set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_open`, false)
+                if (tiles.tileIs(tiles.getTileLocation(16, 11), assets.tile`left_left_fence_gate_closed`)) {
+                    set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_open`, false)
+                    set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_open`, false)
+                } else {
+                    set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_closed`, true)
+                    set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_closed`, true)
+                }
             }
         } else if (is_overlapping_and_a(sprite_things[2], assets.image`actual_rock`, SpriteKind.OnToggleableThing)) {
             if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
-                set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_closed`, true)
-                set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_closed`, true)
+                if (tiles.tileIs(tiles.getTileLocation(16, 11), assets.tile`left_left_fence_gate_closed`)) {
+                    set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_open`, false)
+                    set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_open`, false)
+                } else {
+                    set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_closed`, true)
+                    set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_closed`, true)
+                }
             }
         }
         if (check_if_need_to_reset()) {
