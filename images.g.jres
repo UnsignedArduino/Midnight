@@ -34,11 +34,6 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "a_button"
     },
-    "image8": {
-        "data": "hwQIAAgAAAAAEREREB///xD/8f8Q//H/EP/x/xAf//8AEf//ABAREQ==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "stump_1_pressed"
-    },
     "image9": {
         "data": "hwQIAAgAAAD//////////////////////////////////////////w==",
         "mimeType": "image/x-mkcd-f4",
@@ -49,15 +44,20 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "actual_rock"
     },
-    "image11": {
-        "data": "hwQIAAgAAAAAAAARAAAR/wAQ//8AEP//ABD//wAQ//8AAPH/AAAQEQ==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "rock_pressed"
-    },
     "image12": {
         "data": "hwQBAAEAAAABAAAA",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "particle"
+    },
+    "image8": {
+        "data": "hwQIAAgAAAAAEBERAPHx/wDxH/8A8R//APEf/wDx8f8AEPH/AAAREQ==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "stump_1_pressed"
+    },
+    "image11": {
+        "data": "hwQIAAgAAAAAAAAQAAAQ8QAA8f8AAPH/AADx/wAA8f8AABD/AAAAEQ==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "rock_pressed"
     },
     "anim1": {
         "namespace": "myAnimations",
