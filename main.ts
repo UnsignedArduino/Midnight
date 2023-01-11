@@ -51,14 +51,16 @@ function run_level_0 () {
     assets.tile`level_2_tile0`,
     assets.tile`level_3_tile`,
     assets.tile`level_4_tile`,
-    assets.tile`level_5_tile`
+    assets.tile`level_5_tile`,
+    assets.tile`level_6_tile`
     ]
     level_select_tiles_overlapped = [
     assets.tile`level_1_tile_overlap`,
     assets.tile`level_2_tile_overlapped`,
     assets.tile`level_3_tile_overlapped`,
     assets.tile`level_4_tile_overlapped`,
-    assets.tile`level_5_tile_overlapped`
+    assets.tile`level_5_tile_overlapped`,
+    assets.tile`level_6_tile_overlapped`
     ]
     while (return_val == 0) {
         pause(0)
@@ -93,6 +95,11 @@ function run_level_0 () {
     animate_screen_leaving(0, 100)
     fade(true, true)
     return return_val
+}
+function prepare_level_6 () {
+    sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_1`), true, true, assets.image`stump_1`))
+    sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_0`), true, true, assets.image`stump_1`))
+    sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_3`), true, true, assets.image`stump_1`))
 }
 function check_if_need_to_reset () {
     return player_on_button_tile_and_press_a(assets.tile`reset_tile`, assets.tile`reset_tile_selected`)
@@ -257,6 +264,8 @@ function run_level (level: number) {
         return_val = run_level_4()
     } else if (level == 5) {
         return_val = run_level_5()
+    } else if (level == 6) {
+        return_val = run_level_6()
     }
     spawn_particles = false
     in_level = false
@@ -354,6 +363,8 @@ function prepare_level (level: number) {
         prepare_level_4()
     } else if (level == 5) {
         prepare_level_5()
+    } else if (level == 6) {
+        prepare_level_6()
     }
     create_tilemap_things()
 }
@@ -609,6 +620,47 @@ function run_level_4 () {
     fade(true, true)
     return 1
 }
+function run_level_6 () {
+    fade(false, false)
+    while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
+        pause(0)
+        if (is_overlapping_and_a(sprite_things[0], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
+            set_tiles([tiles.getTileLocation(12, 4)], assets.tile`left_left_fence_gate_closed`, true)
+            set_tiles([tiles.getTileLocation(12, 5)], assets.tile`right_left_fence_gate_closed`, true)
+            set_tiles([tiles.getTileLocation(18, 8)], assets.tile`left_left_fence_gate_closed`, true)
+            set_tiles([tiles.getTileLocation(18, 9)], assets.tile`right_left_fence_gate_closed`, true)
+        } else if (is_overlapping_and_a(sprite_things[1], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
+            set_tiles([tiles.getTileLocation(8, 9)], assets.tile`left_right_fence_gate_open`, false)
+            set_tiles([tiles.getTileLocation(8, 10)], assets.tile`right_right_fence_gate_open`, false)
+        } else if (is_overlapping_and_a(sprite_things[2], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
+            set_tiles([tiles.getTileLocation(14, 9)], assets.tile`left_left_fence_gate_open`, false)
+            set_tiles([tiles.getTileLocation(14, 10)], assets.tile`right_left_fence_gate_open`, false)
+            if (tiles.tileIs(tiles.getTileLocation(18, 8), assets.tile`left_left_fence_gate_closed`)) {
+                set_tiles([tiles.getTileLocation(18, 8)], assets.tile`left_left_fence_gate_open`, false)
+                set_tiles([tiles.getTileLocation(18, 9)], assets.tile`right_left_fence_gate_open`, false)
+            } else {
+                set_tiles([tiles.getTileLocation(18, 8)], assets.tile`left_left_fence_gate_closed`, true)
+                set_tiles([tiles.getTileLocation(18, 9)], assets.tile`right_left_fence_gate_closed`, true)
+            }
+        }
+        if (check_if_need_to_reset()) {
+            enable_controls(false)
+            fade(true, true)
+            return -1
+        }
+        if (check_if_need_to_exit_left()) {
+            animate_screen_leaving(-100, 0)
+            fade(true, true)
+            return -2
+        }
+        if (controller.A.isPressed()) {
+            wait_for_button(false, true)
+        }
+    }
+    animate_screen_leaving(100, 0)
+    fade(true, true)
+    return 1
+}
 function prepare_level_0 () {
     add_label("Midnight", 4, 4, true, true, 16).z = 0
     add_label("A puzzle game by", 24, 4, true, true, 8).z = 0
@@ -670,7 +722,8 @@ tiles.createSmallMap(tilemap`level_0`),
 tiles.createSmallMap(tilemap`level_2`),
 tiles.createSmallMap(tilemap`level_3`),
 tiles.createSmallMap(tilemap`level_4`),
-tiles.createSmallMap(tilemap`level_5`)
+tiles.createSmallMap(tilemap`level_5`),
+tiles.createSmallMap(tilemap`level_7`)
 ]
 scene.setBackgroundColor(15)
 game.onUpdate(function () {
