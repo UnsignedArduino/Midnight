@@ -96,11 +96,6 @@ function run_level_0 () {
     fade(true, true)
     return return_val
 }
-function prepare_level_6 () {
-    sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_1`), true, true, assets.image`stump_1`))
-    sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_0`), true, true, assets.image`stump_1`))
-    sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_3`), true, true, assets.image`stump_1`))
-}
 function check_if_need_to_reset () {
     return player_on_button_tile_and_press_a(assets.tile`reset_tile`, assets.tile`reset_tile_selected`)
 }
@@ -112,75 +107,6 @@ function swap_tile (old_tile: Image, new_tile: Image, do_wall: boolean) {
 }
 function prepare_level_3 () {
     sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock`), true, true, assets.image`actual_rock`))
-}
-function run_level_5 () {
-    fade(false, false)
-    while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
-        pause(0)
-        if (is_overlapping_and_a(sprite_things[0], assets.image`rock_pressed`, SpriteKind.ToggleableThing)) {
-        	
-        } else if (is_overlapping_and_a(sprite_things[0], assets.image`actual_rock`, SpriteKind.OnToggleableThing)) {
-        	
-        }
-        if (is_overlapping_and_a(sprite_things[1], assets.image`rock_pressed`, SpriteKind.ToggleableThing)) {
-            if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
-                if (tiles.tileIs(tiles.getTileLocation(14, 11), assets.tile`left_left_fence_gate_closed`)) {
-                    set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_open`, false)
-                    set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_open`, false)
-                } else {
-                    set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_closed`, true)
-                    set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_closed`, true)
-                }
-            }
-        } else if (is_overlapping_and_a(sprite_things[1], assets.image`actual_rock`, SpriteKind.OnToggleableThing)) {
-            if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
-                if (tiles.tileIs(tiles.getTileLocation(14, 11), assets.tile`left_left_fence_gate_closed`)) {
-                    set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_open`, false)
-                    set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_open`, false)
-                } else {
-                    set_tiles([tiles.getTileLocation(14, 11)], assets.tile`left_left_fence_gate_closed`, true)
-                    set_tiles([tiles.getTileLocation(14, 12)], assets.tile`right_left_fence_gate_closed`, true)
-                }
-            }
-        }
-        if (is_overlapping_and_a(sprite_things[2], assets.image`rock_pressed`, SpriteKind.ToggleableThing)) {
-            if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
-                if (tiles.tileIs(tiles.getTileLocation(16, 11), assets.tile`left_left_fence_gate_closed`)) {
-                    set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_open`, false)
-                    set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_open`, false)
-                } else {
-                    set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_closed`, true)
-                    set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_closed`, true)
-                }
-            }
-        } else if (is_overlapping_and_a(sprite_things[2], assets.image`actual_rock`, SpriteKind.OnToggleableThing)) {
-            if (sprite_things[0].kind() == SpriteKind.OnToggleableThing) {
-                if (tiles.tileIs(tiles.getTileLocation(16, 11), assets.tile`left_left_fence_gate_closed`)) {
-                    set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_open`, false)
-                    set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_open`, false)
-                } else {
-                    set_tiles([tiles.getTileLocation(16, 11)], assets.tile`left_left_fence_gate_closed`, true)
-                    set_tiles([tiles.getTileLocation(16, 12)], assets.tile`right_left_fence_gate_closed`, true)
-                }
-            }
-        }
-        if (check_if_need_to_reset()) {
-            enable_controls(false)
-            fade(true, true)
-            return -1
-        }
-        if (check_if_need_to_exit_right()) {
-            animate_screen_leaving(100, 0)
-            fade(true, true)
-            return -2
-        }
-        if (controller.A.isPressed()) {
-            wait_for_button(false, true)
-        }
-    }
-    animate_screen_leaving(100, 0)
-    fade(true, true)
-    return 1
 }
 function add_label (text: string, top: number, left: number, relative: boolean, ghost: boolean, size: number) {
     text_sprite = textsprite.create(text, 15, 1)
@@ -260,12 +186,6 @@ function run_level (level: number) {
         return_val = run_level_2()
     } else if (level == 3) {
         return_val = run_level_3()
-    } else if (level == 4) {
-        return_val = run_level_4()
-    } else if (level == 5) {
-        return_val = run_level_5()
-    } else if (level == 6) {
-        return_val = run_level_6()
     }
     spawn_particles = false
     in_level = false
@@ -359,12 +279,6 @@ function prepare_level (level: number) {
         prepare_level_2()
     } else if (level == 3) {
         prepare_level_3()
-    } else if (level == 4) {
-        prepare_level_4()
-    } else if (level == 5) {
-        prepare_level_5()
-    } else if (level == 6) {
-        prepare_level_6()
     }
     create_tilemap_things()
 }
@@ -491,11 +405,6 @@ function run_level_3 () {
     fade(true, true)
     return 1
 }
-function prepare_level_5 () {
-    sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock`), true, true, assets.image`actual_rock`))
-    sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock_0`), true, true, assets.image`actual_rock`))
-    sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock_3`), true, true, assets.image`actual_rock`))
-}
 function run_level_2 () {
     fade(false, false)
     while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
@@ -529,11 +438,6 @@ function run_level_2 () {
     animate_screen_leaving(100, 0)
     fade(true, true)
     return 1
-}
-function prepare_level_4 () {
-    sprite_things.push(make_toggleable_thing(tiles.getTilesByType(assets.tile`tile_rock`), true, true, assets.image`actual_rock`))
-    sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_1`), true, true, assets.image`stump_1`))
-    sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_0`), true, true, assets.image`stump_1`))
 }
 function is_on_location (locs_in_list: tiles.Location[]) {
     for (let location of locs_in_list) {
@@ -581,85 +485,6 @@ function prepare_level_2 () {
     sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_1`), true, true, assets.image`stump_1`))
     sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_0`), true, true, assets.image`stump_1`))
     sprite_things.push(make_untouched_thing(tiles.getTilesByType(assets.tile`tile_stump_3`), true, true, assets.image`stump_1`))
-}
-function run_level_4 () {
-    fade(false, false)
-    while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
-        pause(0)
-        if (is_overlapping_and_a(sprite_things[0], assets.image`rock_pressed`, SpriteKind.ToggleableThing)) {
-            set_tiles([tiles.getTileLocation(13, 10)], assets.tile`left_left_fence_gate_open`, false)
-            set_tiles([tiles.getTileLocation(13, 11)], assets.tile`right_left_fence_gate_open`, false)
-            set_tiles([tiles.getTileLocation(9, 10)], assets.tile`left_right_fence_gate_closed`, true)
-            set_tiles([tiles.getTileLocation(9, 11)], assets.tile`left_left_fence_gate_closed0`, true)
-        } else if (is_overlapping_and_a(sprite_things[0], assets.image`actual_rock`, SpriteKind.OnToggleableThing)) {
-            set_tiles([tiles.getTileLocation(13, 10)], assets.tile`left_left_fence_gate_closed`, true)
-            set_tiles([tiles.getTileLocation(13, 11)], assets.tile`right_left_fence_gate_closed`, true)
-            set_tiles([tiles.getTileLocation(9, 10)], assets.tile`left_right_fence_gate_open`, false)
-            set_tiles([tiles.getTileLocation(9, 11)], assets.tile`right_right_fence_gate_open`, false)
-        } else if (is_overlapping_and_a(sprite_things[1], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
-        	
-        } else if (is_overlapping_and_a(sprite_things[2], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
-            set_tiles([tiles.getTileLocation(6, 10)], assets.tile`left_right_fence_gate_open`, false)
-            set_tiles([tiles.getTileLocation(6, 11)], assets.tile`right_right_fence_gate_open`, false)
-        }
-        if (check_if_need_to_reset()) {
-            enable_controls(false)
-            fade(true, true)
-            return -1
-        }
-        if (check_if_need_to_exit_left()) {
-            animate_screen_leaving(-100, 0)
-            fade(true, true)
-            return -2
-        }
-        if (controller.A.isPressed()) {
-            wait_for_button(false, true)
-        }
-    }
-    animate_screen_leaving(-100, 0)
-    fade(true, true)
-    return 1
-}
-function run_level_6 () {
-    fade(false, false)
-    while (!(is_on_location(tiles.getTilesByType(assets.tile`tile_target`)))) {
-        pause(0)
-        if (is_overlapping_and_a(sprite_things[0], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
-            set_tiles([tiles.getTileLocation(12, 4)], assets.tile`left_left_fence_gate_closed`, true)
-            set_tiles([tiles.getTileLocation(12, 5)], assets.tile`right_left_fence_gate_closed`, true)
-            set_tiles([tiles.getTileLocation(18, 8)], assets.tile`left_left_fence_gate_closed`, true)
-            set_tiles([tiles.getTileLocation(18, 9)], assets.tile`right_left_fence_gate_closed`, true)
-        } else if (is_overlapping_and_a(sprite_things[1], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
-            set_tiles([tiles.getTileLocation(8, 9)], assets.tile`left_right_fence_gate_open`, false)
-            set_tiles([tiles.getTileLocation(8, 10)], assets.tile`right_right_fence_gate_open`, false)
-        } else if (is_overlapping_and_a(sprite_things[2], assets.image`stump_1_pressed`, SpriteKind.UntouchedThing)) {
-            set_tiles([tiles.getTileLocation(14, 9)], assets.tile`left_left_fence_gate_open`, false)
-            set_tiles([tiles.getTileLocation(14, 10)], assets.tile`right_left_fence_gate_open`, false)
-            if (tiles.tileIs(tiles.getTileLocation(18, 8), assets.tile`left_left_fence_gate_closed`)) {
-                set_tiles([tiles.getTileLocation(18, 8)], assets.tile`left_left_fence_gate_open`, false)
-                set_tiles([tiles.getTileLocation(18, 9)], assets.tile`right_left_fence_gate_open`, false)
-            } else {
-                set_tiles([tiles.getTileLocation(18, 8)], assets.tile`left_left_fence_gate_closed`, true)
-                set_tiles([tiles.getTileLocation(18, 9)], assets.tile`right_left_fence_gate_closed`, true)
-            }
-        }
-        if (check_if_need_to_reset()) {
-            enable_controls(false)
-            fade(true, true)
-            return -1
-        }
-        if (check_if_need_to_exit_left()) {
-            animate_screen_leaving(-100, 0)
-            fade(true, true)
-            return -2
-        }
-        if (controller.A.isPressed()) {
-            wait_for_button(false, true)
-        }
-    }
-    animate_screen_leaving(100, 0)
-    fade(true, true)
-    return 1
 }
 function prepare_level_0 () {
     add_label("Midnight", 4, 4, true, true, 16).z = 0
@@ -720,10 +545,7 @@ level_tilemaps = [
 tiles.createSmallMap(tilemap`level_6`),
 tiles.createSmallMap(tilemap`level_0`),
 tiles.createSmallMap(tilemap`level_2`),
-tiles.createSmallMap(tilemap`level_3`),
-tiles.createSmallMap(tilemap`level_4`),
-tiles.createSmallMap(tilemap`level_5`),
-tiles.createSmallMap(tilemap`level_7`)
+tiles.createSmallMap(tilemap`level_3`)
 ]
 scene.setBackgroundColor(15)
 game.onUpdate(function () {
